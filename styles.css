@@ -335,10 +335,14 @@ main {
 /* Project card links */
 .project-card h3 a {
   color: var(--color-text);
+  text-decoration: underline;
+  text-decoration-color: var(--color-brass);
+  text-underline-offset: 3px;
 }
 
 .project-card h3 a:hover {
   color: var(--color-brass);
+  text-decoration-color: var(--color-brass-light);
 }
 
 /* Site by in footer */
