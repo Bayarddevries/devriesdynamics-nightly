@@ -265,7 +265,9 @@
     });
 
     // Initialize
-    renderCards();
+    try {
+      renderCards();
+    } catch(e) { console.error('renderCards error:', e); }
   </script>
 </body>
 </html>
