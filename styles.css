@@ -323,6 +323,7 @@ main {
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.3s ease;
+  z-index: 10;
 }
 
 .project-card:hover {
