@@ -16,55 +16,254 @@
     </nav>
   </header>
 
+  <!-- Three.js Background -->
+  <div id="projects-bg"></div>
+
   <main>
     <section class="hero compact">
-      <h1>Projects</h1>
+      <h1 class="brass-name">Projects</h1>
+      <p class="tagline">What I've built</p>
     </section>
 
-    <section class="projects-list">
-      <article class="project-item">
-        <h3>Shoebox V2</h3>
-        <p>Interactive archival system for Métis historical photos and documents. Features include geolocation mapping, family tree browsing, and timeline views.</p>
-        <div class="project-links">
-          <span class="tag">React</span>
-          <span class="tag">Leaflet</span>
-          <span class="tag">IndexedDB</span>
-        </div>
-      </article>
-
-      <article class="project-item">
-        <h3>Homeland Map</h3>
-        <p>Visual exploration tool for Métis historical territories. Users navigate interactive maps showing settlement patterns, migration routes, and cultural sites.</p>
-        <div class="project-links">
-          <span class="tag">D3.js</span>
-          <span class="tag">TopoJSON</span>
-          <span class="tag">Leaflet</span>
-        </div>
-      </article>
-
-      <article class="project-item">
-        <h3>Métis Trail RPG</h3>
-        <p>A narrative-driven game exploring the historical journey of the Métis people. Players make choices that affect their journey West and back.</p>
-        <div class="project-links">
-          <span class="tag">TypeScript</span>
-          <span class="tag">Canvas</span>
-          <span class="tag">Game Dev</span>
-        </div>
-      </article>
-
-      <article class="project-item">
-        <h3>RRMNHC Site</h3>
-        <p>Website for the Red River Métis Nation Heritage Center. Provides information about exhibitions, events, and Métis history.</p>
-        <div class="project-links">
-          <span class="tag">Next.js</span>
-          <span class="tag">Contentful</span>
-        </div>
-      </article>
+    <section class="project-cards" id="projectCards">
+      <!-- Cards rendered from JS -->
     </section>
   </main>
 
+  <!-- Project Detail Modal -->
+  <div class="project-modal" id="projectModal">
+    <button class="modal-close" id="modalClose">&times;</button>
+    <div class="modal-nav modal-prev" id="modalPrev">‹</div>
+    <div class="modal-nav modal-next" id="modalNext">›</div>
+    <div class="modal-content" id="modalContent">
+      <!-- Populated by JS -->
+    </div>
+    <div class="modal-dots" id="modalDots">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+
   <footer>
-    <p>&copy; 2026 Bayard deVries</p>
+    <p class="site-by">Bayard deVries · <a href="index.html" style="color: var(--color-brass);">Home</a></p>
   </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+    // ============================================
+    // PROJECT DATA — Add new projects here
+    // ============================================
+    const projects = [
+      {
+        id: 'shoebox',
+        title: 'Shoebox V2',
+        shortDesc: 'Interactive Métis photo archive',
+        description: 'Built end-to-end: software, metadata architecture, hardware procurement, and training. 302-photo archive with geolocation mapping, family tree browsing, and timeline views. Designed to preserve Red River Métis heritage for future generations.',
+        tech: ['React', 'Leaflet', 'IndexedDB', 'PWA'],
+        year: '2024',
+        link: 'https://bayarddevries.github.io/shoebox-v2/',
+        color: '#6B8F52'
+      },
+      {
+        id: 'homeland-map',
+        title: 'Homeland Map',
+        shortDesc: 'Interactive Métis territory visualization',
+        description: 'Interactive Métis territory visualization with settlement patterns, migration routes, and cultural sites. Includes buffalo herd overlays and historical transition animations. Built to help people explore and understand Métis geography.',
+        tech: ['D3.js', 'GeoJSON', 'Leaflet', 'TopoJSON'],
+        year: '2024',
+        link: 'https://bayarddevries.github.io/metis-homeland-map/',
+        color: '#C49A3A'
+      },
+      {
+        id: 'metis-trail',
+        title: 'Métis Trail RPG',
+        shortDesc: 'Narrative-driven historical game',
+        description: 'Narrative-driven historical game exploring the Métis journey West and back. Features d20 roleplaying system, 32-color pixel art aesthetic, Made Beaver economy, and branching storylines based on real historical events.',
+        tech: ['TypeScript', 'Canvas', 'Pixel Art', 'd20 System'],
+        year: '2024',
+        link: null,
+        color: '#6B1C23'
+      },
+      {
+        id: 'rrmnhc',
+        title: 'RRMNHC Site',
+        shortDesc: 'Red River Métis Nation Heritage Centre',
+        description: 'Website for the Red River Métis Nation Heritage Centre. Information about exhibitions, events, and Métis history. Content managed via Contentful CMS, with interactive elements powered by Three.js.',
+        tech: ['Next.js', 'Contentful', 'Three.js', 'Vercel'],
+        year: '2023',
+        link: 'https://rrmnhc.ca/',
+        color: '#8FAE7C'
+      }
+    ];
+
+    // ============================================
+    // THREE.JS BACKGROUND — Particle Field
+    // ============================================
+    (function() {
+      const container = document.getElementById('projects-bg');
+      if (!container) return;
+      
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+      camera.position.z = 5;
+      
+      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      container.appendChild(renderer.domElement);
+      
+      // Particles
+      const particleCount = 300;
+      const geometry = new THREE.BufferGeometry();
+      const positions = new Float32Array(particleCount * 3);
+      const colors = new Float32Array(particleCount * 3);
+      
+      const palette = [
+        new THREE.Color(0x6B8F52), // green
+        new THREE.Color(0xC49A3A), // brass
+        new THREE.Color(0x6B1C23), // wine
+        new THREE.Color(0x8FAE7C), // sage
+      ];
+      
+      for (let i = 0; i < particleCount; i++) {
+        positions[i * 3] = (Math.random() - 0.5) * 12;
+        positions[i * 3 + 1] = (Math.random() - 0.5) * 12;
+        positions[i * 3 + 2] = (Math.random() - 0.5) * 6;
+        
+        const c = palette[Math.floor(Math.random() * palette.length)];
+        colors[i * 3] = c.r;
+        colors[i * 3 + 1] = c.g;
+        colors[i * 3 + 2] = c.b;
+      }
+      
+      geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+      
+      const material = new THREE.PointsMaterial({ 
+        size: 0.06, 
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.6
+      });
+      const particles = new THREE.Points(geometry, material);
+      scene.add(particles);
+      
+      let mouseX = 0, mouseY = 0;
+      document.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+        mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+      });
+      
+      function animate() {
+        requestAnimationFrame(animate);
+        
+        particles.rotation.x += 0.0003 + mouseY * 0.001;
+        particles.rotation.y += 0.0005 + mouseX * 0.001;
+        
+        renderer.render(scene, camera);
+      }
+      animate();
+      
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    })();
+
+    // ============================================
+    // PROJECT CARDS RENDER
+    // ============================================
+    const cardsContainer = document.getElementById('projectCards');
+    const modal = document.getElementById('projectModal');
+    const modalContent = document.getElementById('modalContent');
+    const modalClose = document.getElementById('modalClose');
+    const modalPrev = document.getElementById('modalPrev');
+    const modalNext = document.getElementById('modalNext');
+    const modalDots = document.getElementById('modalDots');
+    
+    let currentProjectIndex = 0;
+
+    function renderCards() {
+      cardsContainer.innerHTML = projects.map((p, i) => `
+        <article class="project-card-interactive" data-index="${i}" style="--accent: ${p.color}">
+          <div class="card-glow"></div>
+          <h3>${p.title}</h3>
+          <p>${p.shortDesc}</p>
+          <span class="card-year">${p.year}</span>
+        </article>
+      `).join('');
+      
+      // Add click handlers
+      document.querySelectorAll('.project-card-interactive').forEach(card => {
+        card.addEventListener('click', () => {
+          currentProjectIndex = parseInt(card.dataset.index);
+          openModal(currentProjectIndex);
+        });
+      });
+    }
+
+    function renderDots() {
+      modalDots.innerHTML = projects.map((_, i) => `
+        <span class="dot ${i === currentProjectIndex ? 'active' : ''}" data-index="${i}"></span>
+      `).join('');
+      
+      modalDots.querySelectorAll('.dot').forEach(dot => {
+        dot.addEventListener('click', () => {
+          currentProjectIndex = parseInt(dot.dataset.index);
+          openModal(currentProjectIndex);
+        });
+      });
+    }
+
+    function openModal(index) {
+      const p = projects[index];
+      currentProjectIndex = index;
+      
+      modalContent.innerHTML = `
+        <h2 style="color: ${p.color}; margin-bottom: 0.5rem;">${p.title}</h2>
+        <p class="modal-year" style="color: var(--color-text-muted); font-size: 0.85rem; margin-bottom: 1.5rem;">${p.year}</p>
+        <p class="modal-desc" style="font-size: 1.1rem; line-height: 1.7; margin-bottom: 1.5rem;">${p.description}</p>
+        <div class="modal-tech">
+          ${p.tech.map(t => `<span class="tag">${t}</span>`).join('')}
+        </div>
+        ${p.link ? `<a href="${p.link}" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top: 1.5rem; display: inline-block;">View Project ↗</a>` : ''}
+      `;
+      
+      renderDots();
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    modalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    modalPrev.addEventListener('click', () => {
+      currentProjectIndex = (currentProjectIndex - 1 + projects.length) % projects.length;
+      openModal(currentProjectIndex);
+    });
+
+    modalNext.addEventListener('click', () => {
+      currentProjectIndex = (currentProjectIndex + 1) % projects.length;
+      openModal(currentProjectIndex);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!modal.classList.contains('open')) return;
+      if (e.key === 'Escape') closeModal();
+      if (e.key === 'ArrowLeft') currentProjectIndex = (currentProjectIndex - 1 + projects.length) % projects.length;
+      if (e.key === 'ArrowRight') currentProjectIndex = (currentProjectIndex + 1) % projects.length;
+      openModal(currentProjectIndex);
+    });
+
+    // Initialize
+    renderCards();
+  </script>
 </body>
 </html>
