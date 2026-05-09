@@ -16,9 +16,6 @@
     </nav>
   </header>
 
-  <!-- Three.js Background -->
-  <div id="projects-bg"></div>
-
   <main>
     <section class="hero compact">
       <h1 class="brass-name">Projects</h1>
@@ -47,12 +44,11 @@
     <p class="site-by">Bayard deVries · <a href="index.html" style="color: var(--color-brass);">Home</a></p>
   </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script>
     // ============================================
     // PROJECT DATA — Add new projects here
     // ============================================
-    const projects = [
+    var projects = [
       {
         id: 'shoebox',
         title: 'Shoebox V2',
@@ -96,84 +92,7 @@
     ];
 
     // ============================================
-    // THREE.JS BACKGROUND — Particle Field
-    // ============================================
-    try {
-    (function() {
-      const container = document.getElementById('projects-bg');
-      if (!container) return;
-      
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-      camera.position.z = 5;
-      
-      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      container.appendChild(renderer.domElement);
-      
-      // Particles
-      const particleCount = 300;
-      const geometry = new THREE.BufferGeometry();
-      const positions = new Float32Array(particleCount * 3);
-      const colors = new Float32Array(particleCount * 3);
-      
-      const palette = [
-        new THREE.Color(0x6B8F52), // green
-        new THREE.Color(0xC49A3A), // brass
-        new THREE.Color(0x6B1C23), // wine
-        new THREE.Color(0x8FAE7C), // sage
-      ];
-      
-      for (let i = 0; i < particleCount; i++) {
-        positions[i * 3] = (Math.random() - 0.5) * 12;
-        positions[i * 3 + 1] = (Math.random() - 0.5) * 12;
-        positions[i * 3 + 2] = (Math.random() - 0.5) * 6;
-        
-        const c = palette[Math.floor(Math.random() * palette.length)];
-        colors[i * 3] = c.r;
-        colors[i * 3 + 1] = c.g;
-        colors[i * 3 + 2] = c.b;
-      }
-      
-      geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-      geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-      
-      const material = new THREE.PointsMaterial({ 
-        size: 0.06, 
-        vertexColors: true,
-        transparent: true,
-        opacity: 0.6
-      });
-      const particles = new THREE.Points(geometry, material);
-      scene.add(particles);
-      
-      let mouseX = 0, mouseY = 0;
-      document.addEventListener('mousemove', (e) => {
-        mouseX = (e.clientX / window.innerWidth) * 2 - 1;
-        mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
-      });
-      
-      function animate() {
-        requestAnimationFrame(animate);
-        
-        particles.rotation.x += 0.0003 + mouseY * 0.001;
-        particles.rotation.y += 0.0005 + mouseX * 0.001;
-        
-        renderer.render(scene, camera);
-      }
-      animate();
-      
-      window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-      });
-    })();
-    } catch(e) { console.error('Three.js background error:', e); }
-
-    // ============================================
-    // PROJECT CARDS RENDER
+    // DOM ELEMENTS
     // ============================================
     var cardsContainer = document.getElementById('projectCards');
     var modal = document.getElementById('projectModal');
@@ -182,54 +101,67 @@
     var modalPrev = document.getElementById('modalPrev');
     var modalNext = document.getElementById('modalNext');
     var modalDots = document.getElementById('modalDots');
-    
     var currentProjectIndex = 0;
 
+    // ============================================
+    // FUNCTIONS
+    // ============================================
     function renderCards() {
-      cardsContainer.innerHTML = projects.map((p, i) => `
-        <article class="project-card-interactive" data-index="${i}" style="--accent: ${p.color}">
-          <div class="card-glow"></div>
-          <h3>${p.title}</h3>
-          <p>${p.shortDesc}</p>
-          <span class="card-year">${p.year}</span>
-        </article>
-      `).join('');
+      var html = '';
+      for (var i = 0; i < projects.length; i++) {
+        var p = projects[i];
+        html += '<article class="project-card-interactive" data-index="' + i + '" style="--accent: ' + p.color + '">';
+        html += '<h3>' + p.title + '</h3>';
+        html += '<p>' + p.shortDesc + '</p>';
+        html += '<span class="card-year">' + p.year + '</span>';
+        html += '</article>';
+      }
+      cardsContainer.innerHTML = html;
       
       // Add click handlers
-      document.querySelectorAll('.project-card-interactive').forEach(card => {
-        card.addEventListener('click', () => {
-          currentProjectIndex = parseInt(card.dataset.index);
-          openModal(currentProjectIndex);
-        });
-      });
+      var cards = document.querySelectorAll('.project-card-interactive');
+      for (var j = 0; j < cards.length; j++) {
+        cards[j].addEventListener('click', (function(idx) {
+          return function() {
+            currentProjectIndex = idx;
+            openModal(idx);
+          };
+        })(j));
+      }
     }
 
     function renderDots() {
-      modalDots.innerHTML = projects.map((_, i) => `
-        <span class="dot ${i === currentProjectIndex ? 'active' : ''}" data-index="${i}"></span>
-      `).join('');
+      var html = '';
+      for (var i = 0; i < projects.length; i++) {
+        html += '<span class="dot ' + (i === currentProjectIndex ? 'active' : '') + '" data-index="' + i + '"></span>';
+      }
+      modalDots.innerHTML = html;
       
-      modalDots.querySelectorAll('.dot').forEach(dot => {
-        dot.addEventListener('click', () => {
-          currentProjectIndex = parseInt(dot.dataset.index);
-          openModal(currentProjectIndex);
-        });
-      });
+      var dots = modalDots.querySelectorAll('.dot');
+      for (var j = 0; j < dots.length; j++) {
+        dots[j].addEventListener('click', (function(idx) {
+          return function() {
+            currentProjectIndex = idx;
+            openModal(idx);
+          };
+        })(j));
+      }
     }
 
     function openModal(index) {
-      const p = projects[index];
+      var p = projects[index];
       currentProjectIndex = index;
       
-      modalContent.innerHTML = `
-        <h2 style="color: ${p.color}; margin-bottom: 0.5rem;">${p.title}</h2>
-        <p class="modal-year" style="color: var(--color-text-muted); font-size: 0.85rem; margin-bottom: 1.5rem;">${p.year}</p>
-        <p class="modal-desc" style="font-size: 1.1rem; line-height: 1.7; margin-bottom: 1.5rem;">${p.description}</p>
-        <div class="modal-tech">
-          ${p.tech.map(t => `<span class="tag">${t}</span>`).join('')}
-        </div>
-        ${p.link ? `<a href="${p.link}" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top: 1.5rem; display: inline-block;">View Project ↗</a>` : ''}
-      `;
+      var techHtml = '';
+      for (var i = 0; i < p.tech.length; i++) {
+        techHtml += '<span class="tag">' + p.tech[i] + '</span>';
+      }
+      
+      modalContent.innerHTML = '<h2 style="color: ' + p.color + '; margin-bottom: 0.5rem;">' + p.title + '</h2>' +
+        '<p class="modal-year" style="color: var(--color-text-muted); font-size: 0.85rem; margin-bottom: 1.5rem;">' + p.year + '</p>' +
+        '<p class="modal-desc" style="font-size: 1.1rem; line-height: 1.7; margin-bottom: 1.5rem;">' + p.description + '</p>' +
+        '<div class="modal-tech">' + techHtml + '</div>' +
+        (p.link ? '<a href="' + p.link + '" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top: 1.5rem; display: inline-block;">View Project ↗</a>' : '');
       
       renderDots();
       modal.classList.add('open');
@@ -241,22 +173,25 @@
       document.body.style.overflow = '';
     }
 
+    // ============================================
+    // EVENT LISTENERS
+    // ============================================
     modalClose.addEventListener('click', closeModal);
-    modal.addEventListener('click', (e) => {
+    modal.addEventListener('click', function(e) {
       if (e.target === modal) closeModal();
     });
 
-    modalPrev.addEventListener('click', () => {
+    modalPrev.addEventListener('click', function() {
       currentProjectIndex = (currentProjectIndex - 1 + projects.length) % projects.length;
       openModal(currentProjectIndex);
     });
 
-    modalNext.addEventListener('click', () => {
+    modalNext.addEventListener('click', function() {
       currentProjectIndex = (currentProjectIndex + 1) % projects.length;
       openModal(currentProjectIndex);
     });
 
-    document.addEventListener('keydown', (e) => {
+    document.addEventListener('keydown', function(e) {
       if (!modal.classList.contains('open')) return;
       if (e.key === 'Escape') closeModal();
       if (e.key === 'ArrowLeft') currentProjectIndex = (currentProjectIndex - 1 + projects.length) % projects.length;
@@ -264,10 +199,10 @@
       openModal(currentProjectIndex);
     });
 
-    // Initialize
-    try {
-      renderCards();
-    } catch(e) { console.error('renderCards error:', e); }
+    // ============================================
+    // INIT
+    // ============================================
+    renderCards();
   </script>
 </body>
 </html>
