@@ -5,18 +5,20 @@
   padding: 0;
 }
 
-/* Variables — Forest Green + Brass */
+/* Variables — Dark Forest + Brass */
 :root {
-  --color-bg: #F4F1EA;
-  --color-surface: #FFFFFF;
-  --color-text: #1A1A1A;
-  --color-text-muted: #5C5C5C;
-  --color-border: #D8D2C8;
-  --color-green: #2C4A1E;
-  --color-green-mid: #3D6628;
-  --color-green-light: #E8EEE0;
-  --color-brass: #A67C29;
-  --color-brass-light: #F0E4C7;
+  --color-bg: #131A0F;
+  --color-surface: #1C2416;
+  --color-surface-raised: #242E1C;
+  --color-text: #E8E0CC;
+  --color-text-muted: #8A9A78;
+  --color-border: #2E3A25;
+  --color-green: #6B8F52;
+  --color-green-bright: #8FB872;
+  --color-green-dim: #3D5429;
+  --color-brass: #C49A3A;
+  --color-brass-dim: #8A6E28;
+  --color-brass-glow: rgba(196, 154, 58, 0.15);
   --font-heading: 'Space Grotesk', sans-serif;
   --font-body: 'DM Sans', sans-serif;
   --max-width: 900px;
@@ -49,6 +51,16 @@ h1, h2, h3, h4 {
   line-height: 1.2;
 }
 
+a {
+  color: var(--color-brass);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+a:hover {
+  color: var(--color-green-bright);
+}
+
 /* Header */
 header {
   background: var(--color-surface);
@@ -75,13 +87,13 @@ nav a {
   letter-spacing: 0.02em;
 }
 
-nav a:hover,
-nav a.active {
-  color: var(--color-green);
+nav a:hover {
+  color: var(--color-text);
 }
 
 nav a.active {
-  border-bottom-color: var(--color-green);
+  color: var(--color-brass);
+  border-bottom-color: var(--color-brass);
 }
 
 /* Main */
@@ -96,17 +108,28 @@ main {
 /* Hero */
 .hero {
   text-align: center;
-  padding: 4rem 1rem;
+  padding: 4rem 1rem 3rem;
+  position: relative;
+}
+
+/* Subtle brass horizontal rule accent above hero */
+.hero:: before {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-brass), transparent);
+  margin: 0 auto 2rem;
 }
 
 .hero h1 {
   font-family: var(--font-heading);
   font-size: 2.75rem;
   font-weight: 300;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   margin-bottom: 0.75rem;
-  color: var(--color-green);
+  color: var(--color-text);
 }
 
 .hero .tagline {
@@ -115,7 +138,26 @@ main {
   font-family: var(--font-heading);
   font-weight: 300;
   letter-spacing: 0.04em;
-  margin-bottom: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero .location {
+  color: var(--color-brass);
+  font-size: 0.78rem;
+  font-family: var(--font-heading);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 2.5rem;
+  opacity: 0.85;
+}
+
+.hero .summary {
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+  line-height: 1.75;
+  max-width: 520px;
+  margin: 0 auto 2.5rem;
+  font-weight: 300;
 }
 
 .cta-group {
@@ -127,35 +169,79 @@ main {
 
 .btn {
   display: inline-block;
-  padding: 0.7rem 1.4rem;
+  padding: 0.7rem 1.5rem;
   border-radius: 4px;
   text-decoration: none;
   font-size: 0.85rem;
   font-family: var(--font-heading);
   font-weight: 400;
   letter-spacing: 0.04em;
-  transition: background 0.15s ease, color 0.15s ease;
+  transition: all 0.15s ease;
   cursor: pointer;
   border: none;
 }
 
 .btn-primary {
-  background: var(--color-green);
-  color: var(--color-surface);
+  background: var(--color-brass);
+  color: #131A0F;
+  font-weight: 500;
 }
 
 .btn-primary:hover {
-  background: var(--color-green-mid);
+  background: #D4AA45;
+  color: #131A0F;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(196, 154, 58, 0.25);
 }
 
 .btn-secondary {
-  background: var(--color-surface);
+  background: transparent;
   color: var(--color-text);
   border: 1px solid var(--color-border);
 }
 
 .btn-secondary:hover {
-  background: var(--color-bg);
+  background: var(--color-surface-raised);
+  border-color: var(--color-text-muted);
+  color: var(--color-text);
+  transform: translateY(-1px);
+}
+
+/* Stats bar */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--color-border);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  margin: 3rem auto;
+  max-width: 520px;
+  overflow: hidden;
+}
+
+.stat-item {
+  background: var(--color-surface);
+  padding: 1.25rem 1rem;
+  text-align: center;
+}
+
+.stat-number {
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  font-weight: 300;
+  color: var(--color-brass);
+  display: block;
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+
+.stat-label {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  font-family: var(--font-heading);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 /* Sections */
@@ -163,7 +249,7 @@ main {
   font-size: 0.7rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--color-text-muted);
+  color: var(--color-brass);
   border-bottom: 1px solid var(--color-border);
   padding-bottom: 0.4rem;
   margin-bottom: 1.5rem;
@@ -181,6 +267,7 @@ main {
   font-weight: 400;
   margin-bottom: 1.5rem;
   font-family: var(--font-heading);
+  color: var(--color-text);
 }
 
 .project-grid {
@@ -194,11 +281,14 @@ main {
   border: 1px solid var(--color-border);
   border-radius: 8px;
   padding: 1.5rem;
-  transition: border-color 0.15s ease;
+  transition: all 0.2s ease;
 }
 
 .project-card:hover {
-  border-color: var(--color-brass);
+  border-color: var(--color-brass-dim);
+  background: var(--color-surface-raised);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
 }
 
 .project-card h3 {
@@ -206,7 +296,7 @@ main {
   font-weight: 500;
   font-family: var(--font-heading);
   margin-bottom: 0.5rem;
-  color: var(--color-green);
+  color: var(--color-text);
 }
 
 .project-card p {
@@ -218,8 +308,8 @@ main {
 
 .tag {
   display: inline-block;
-  background: var(--color-green-light);
-  color: var(--color-green-mid);
+  background: var(--color-green-dim);
+  color: var(--color-green-bright);
   font-size: 0.7rem;
   padding: 0.2rem 0.5rem;
   border-radius: 3px;
@@ -239,7 +329,7 @@ main {
 .page-header {
   text-align: center;
   padding: 1.5rem 0 2rem;
-  border-bottom: 2px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
   margin-bottom: 2rem;
 }
 
@@ -249,7 +339,7 @@ main {
   font-weight: 300;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--color-green);
+  color: var(--color-text);
   margin-bottom: 0.3rem;
 }
 
@@ -276,6 +366,7 @@ main {
 }
 
 .page-header .contact-row a:hover {
+  color: var(--color-green-bright);
   text-decoration: underline;
 }
 
@@ -313,26 +404,32 @@ main {
 
 .job-date {
   font-size: 0.78rem;
-  color: var(--color-text-muted);
+  color: var(--color-brass-dim);
   white-space: nowrap;
   font-family: var(--font-heading);
 }
 
 .expand-btn {
   background: none;
-  border: none;
+  border: 1px solid var(--color-border);
   cursor: pointer;
   color: var(--color-brass);
   font-size: 0.75rem;
-  padding: 0;
+  padding: 0.3rem 0.75rem;
+  border-radius: 3px;
   margin-top: 0.4rem;
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
   font-family: var(--font-heading);
+  transition: all 0.15s ease;
 }
 
-.expand-btn:hover { text-decoration: underline; }
+.expand-btn:hover {
+  background: var(--color-surface-raised);
+  border-color: var(--color-brass-dim);
+  color: var(--color-brass);
+}
 
 .job-details {
   overflow: hidden;
@@ -352,6 +449,7 @@ main {
   margin-bottom: 0.3rem;
   line-height: 1.55;
   font-weight: 300;
+  color: var(--color-text-muted);
 }
 
 .section-block {
@@ -362,7 +460,7 @@ main {
   font-size: 0.7rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--color-text-muted);
+  color: var(--color-brass);
   border-bottom: 1px solid var(--color-border);
   padding-bottom: 0.4rem;
   margin-bottom: 1.25rem;
@@ -418,6 +516,7 @@ main {
   font-family: var(--font-heading);
   font-size: 0.9rem;
   font-weight: 400;
+  color: var(--color-text);
 }
 
 .edu-date {
@@ -431,7 +530,7 @@ main {
 .summary-text {
   font-size: 0.9rem;
   line-height: 1.75;
-  color: var(--color-text);
+  color: var(--color-text-muted);
   font-weight: 300;
   max-width: 580px;
   margin: 0 auto;
@@ -452,7 +551,7 @@ main {
   font-size: 0.85rem;
   font-weight: 500;
   margin-bottom: 0.5rem;
-  color: var(--color-green);
+  color: var(--color-text);
 }
 
 .philosophy-card p {
@@ -494,45 +593,36 @@ main {
   font-weight: 500;
   margin-bottom: 0.4rem;
   font-family: var(--font-heading);
+  color: var(--color-text);
 }
 
 .project-item p {
   color: var(--color-text-muted);
-  font-size: 0.875rem;
-  margin-bottom: 0.85rem;
+  font-size: 0.85rem;
   font-weight: 300;
+  line-height: 1.65;
 }
 
 .project-item .tag {
-  background: var(--color-green-light);
-  color: var(--color-green-mid);
-}
-
-.project-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+  margin-top: 0.5rem;
 }
 
 /* Footer */
 footer {
-  text-align: center;
-  padding: 2rem 1rem;
-  color: var(--color-text-muted);
-  font-size: 0.8rem;
+  background: var(--color-surface);
   border-top: 1px solid var(--color-border);
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
   font-family: var(--font-heading);
-  font-weight: 300;
 }
 
 /* Responsive */
 @media (max-width: 600px) {
-  nav { gap: 1.25rem; }
-  .hero { padding: 2.5rem 1rem; }
   .hero h1 { font-size: 2rem; }
-  .job-row { flex-direction: column; gap: 0.1rem; }
-  .action-row { flex-direction: column; }
-  .action-row .btn { text-align: center; }
-  .resume-page, .about-page { padding: 1.5rem 1rem 3rem; }
+  .stats-bar { grid-template-columns: repeat(3, 1fr); }
+  .stat-number { font-size: 1.4rem; }
+  nav { gap: 1.25rem; }
   .competencies-grid { grid-template-columns: 1fr 1fr; }
 }
