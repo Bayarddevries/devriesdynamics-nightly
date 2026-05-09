@@ -3,30 +3,57 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Page Not Found — Bayard de Vries</title>
+  <title>Page Not Found — Bayard deVries</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    .error-container {
+      text-align: center;
+      padding: 6rem 1rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .error-code {
+      font-family: var(--font-heading);
+      font-size: 6rem;
+      font-weight: 300;
+      color: var(--color-brass);
+      line-height: 1;
+      margin-bottom: 1rem;
+      opacity: 0.8;
+    }
+    .error-message {
+      font-size: 1.25rem;
+      color: var(--color-text-muted);
+      margin-bottom: 2rem;
+    }
+    .error-link {
+      color: var(--color-brass);
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
   <header>
     <nav>
       <a href="index.html">Home</a>
-      <a href="about.html">About</a>
       <a href="projects.html">Projects</a>
+      <a href="resume.html">Resume</a>
     </nav>
   </header>
 
-  <main class="page-content">
-    <section class="hero compact">
-      <h1>404</h1>
-      <p class="tagline">Page not found</p>
-      <div class="cta-group">
-        <a href="index.html" class="btn btn-primary">Go Home</a>
-      </div>
-    </section>
+  <main>
+    <div class="error-container">
+      <div class="error-code">404</div>
+      <p class="error-message">Page not found</p>
+      <p><a href="index.html" class="error-link">Return home</a></p>
+    </div>
   </main>
 
   <footer>
-    <p>&copy; 2026 Bayard de Vries</p>
+    <p>&copy; 2026 Bayard deVries</p>
   </footer>
 </body>
 </html>

@@ -319,6 +319,38 @@ main {
   transform: scale(1.03);
 }
 
+/* Placeholder thumbnail for projects without screenshots */
+.project-thumb-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface-raised);
+}
+
+.placeholder-icon {
+  font-size: 2.5rem;
+  opacity: 0.6;
+}
+
+/* Project card links */
+.project-card h3 a {
+  color: var(--color-text);
+}
+
+.project-card h3 a:hover {
+  color: var(--color-brass);
+}
+
+/* Site by in footer */
+.site-by {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  opacity: 0.6;
+  margin-top: 0.5rem;
+  font-family: var(--font-heading);
+  letter-spacing: 0.05em;
+}
+
 .project-card h3 {
   font-size: 0.95rem;
   font-weight: 500;
