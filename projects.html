@@ -173,15 +173,15 @@
     // ============================================
     // PROJECT CARDS RENDER
     // ============================================
-    const cardsContainer = document.getElementById('projectCards');
-    const modal = document.getElementById('projectModal');
-    const modalContent = document.getElementById('modalContent');
-    const modalClose = document.getElementById('modalClose');
-    const modalPrev = document.getElementById('modalPrev');
-    const modalNext = document.getElementById('modalNext');
-    const modalDots = document.getElementById('modalDots');
+    var cardsContainer = document.getElementById('projectCards');
+    var modal = document.getElementById('projectModal');
+    var modalContent = document.getElementById('modalContent');
+    var modalClose = document.getElementById('modalClose');
+    var modalPrev = document.getElementById('modalPrev');
+    var modalNext = document.getElementById('modalNext');
+    var modalDots = document.getElementById('modalDots');
     
-    let currentProjectIndex = 0;
+    var currentProjectIndex = 0;
 
     function renderCards() {
       cardsContainer.innerHTML = projects.map((p, i) => `
