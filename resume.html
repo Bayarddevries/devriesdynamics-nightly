@@ -5,60 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bayard deVries — Resume</title>
   <link rel="stylesheet" href="styles.css">
-  <style>
-    .resume-page { max-width: 740px; margin: 0 auto; padding: 2rem 1rem 4rem; }
-
-    .resume-header { text-align: center; padding: 2rem 0 1.5rem; border-bottom: 2px solid var(--color-border); margin-bottom: 2rem; }
-    .resume-header h1 { font-size: 2rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.5rem; }
-    .resume-header .contact-line { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem 1.5rem; color: var(--color-text-muted); font-size: 0.85rem; margin-top: 0.75rem; }
-    .resume-header .contact-line a { color: var(--color-accent); text-decoration: none; }
-    .resume-header .contact-line a:hover { text-decoration: underline; }
-
-    .summary { font-size: 1rem; line-height: 1.7; color: var(--color-text); margin-bottom: 2.5rem; max-width: 620px; margin-left: auto; margin-right: auto; text-align: center; }
-
-    .resume-section { margin-bottom: 2.5rem; }
-    .resume-section h2 { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-muted); border-bottom: 1px solid var(--color-border); padding-bottom: 0.4rem; margin-bottom: 1.25rem; }
-
-    .job { margin-bottom: 1.75rem; }
-    .job:last-child { margin-bottom: 0; }
-    .job-header { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.25rem; margin-bottom: 0.2rem; }
-    .job-title { font-weight: 600; font-size: 0.95rem; }
-    .job-org { color: var(--color-text-muted); font-size: 0.9rem; }
-    .job-date { font-size: 0.8rem; color: var(--color-text-muted); white-space: nowrap; }
-    .job-bullets { margin-top: 0.5rem; padding-left: 1rem; }
-    .job-bullets li { font-size: 0.875rem; margin-bottom: 0.3rem; color: var(--color-text); line-height: 1.5; }
-
-    .competencies-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
-    .comp-group h3 { font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 0.4rem; }
-    .comp-group ul { list-style: none; }
-    .comp-group li { font-size: 0.8rem; color: var(--color-text-muted); margin-bottom: 0.2rem; padding-left: 0.75rem; position: relative; }
-    .comp-group li::before { content: '—'; position: absolute; left: 0; color: var(--color-border); }
-
-    .education-item { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
-    .education-name { font-weight: 500; }
-    .education-date { font-size: 0.8rem; color: var(--color-text-muted); white-space: nowrap; }
-
-    .resume-actions { display: flex; gap: 0.75rem; justify-content: center; margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--color-border); }
-    .btn { display: inline-block; padding: 0.6rem 1.25rem; border-radius: 4px; font-size: 0.85rem; text-decoration: none; cursor: pointer; border: none; transition: background 0.15s ease; }
-    .btn-primary { background: var(--color-accent); color: #fff; }
-    .btn-primary:hover { background: var(--color-accent-hover); }
-    .btn-secondary { background: var(--color-surface); color: var(--color-text); border: 1px solid var(--color-border); }
-    .btn-secondary:hover { background: var(--color-bg); }
-
-    .expand-btn { background: none; border: none; cursor: pointer; color: var(--color-accent); font-size: 0.75rem; padding: 0; margin-top: 0.5rem; display: flex; align-items: center; gap: 0.25rem; }
-    .expand-btn:hover { text-decoration: underline; }
-    .expand-btn svg { transition: transform 0.2s ease; }
-    .expand-btn.open svg { transform: rotate(180deg); }
-    .job-details { overflow: hidden; transition: max-height 0.3s ease; max-height: 0; }
-    .job-details.open { max-height: 500px; }
-
-    @media (max-width: 600px) {
-      .resume-header h1 { font-size: 1.5rem; }
-      .job-header { flex-direction: column; gap: 0.1rem; }
-      .resume-actions { flex-direction: column; }
-      .resume-actions .btn { text-align: center; }
-    }
-  </style>
 </head>
 <body>
   <header>
@@ -71,10 +17,10 @@
   </header>
 
   <main class="resume-page">
-    <div class="resume-header">
+    <div class="page-header">
       <h1>Bayard deVries</h1>
-      <p style="color: var(--color-text-muted); font-size: 0.9rem;">Operations &middot; Project Leadership &middot; Digital Innovation</p>
-      <div class="contact-line">
+      <p class="subtitle">Operations &middot; Project Leadership &middot; Digital Innovation</p>
+      <div class="contact-row">
         <span>Winnipeg MB</span>
         <a href="tel:204-510-3865">204-510-3865</a>
         <a href="mailto:Bayarddevries@Gmail.com">Bayarddevries@Gmail.com</a>
@@ -82,23 +28,22 @@
       </div>
     </div>
 
-    <p class="summary">
+    <p class="summary-text" style="margin-bottom: 2.5rem;">
       Operations and project leader with 15+ years managing cross-functional teams, multi-million-dollar budgets, and complex stakeholder environments. Track record of delivering outcomes under ambiguity — from leading a department-wide WFH transition during a pandemic to building a digital archival platform from the ground up.
     </p>
 
-    <section class="resume-section">
+    <div class="section-block">
       <h2>Experience</h2>
 
-      <div class="job">
-        <div class="job-header">
+      <div class="job-card">
+        <div class="job-row">
           <div>
             <span class="job-title">Program Coordinator</span>
             <span class="job-org"> &middot; Red River Metis National Heritage Centre (MMF)</span>
           </div>
           <span class="job-date">2023 &ndash; 2026</span>
         </div>
-        <button class="expand-btn" onclick="toggleJob(this)">
-          <span>Details</span>
+        <button class="expand-btn" onclick="toggleJob(this)">Details
           <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
         <div class="job-details">
@@ -113,16 +58,15 @@
         </div>
       </div>
 
-      <div class="job">
-        <div class="job-header">
+      <div class="job-card">
+        <div class="job-row">
           <div>
             <span class="job-title">Sales & Marketing Manager</span>
             <span class="job-org"> &middot; Shaw Communications</span>
           </div>
           <span class="job-date">2022 &ndash; 2023</span>
         </div>
-        <button class="expand-btn" onclick="toggleJob(this)">
-          <span>Details</span>
+        <button class="expand-btn" onclick="toggleJob(this)">Details
           <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
         <div class="job-details">
@@ -135,16 +79,15 @@
         </div>
       </div>
 
-      <div class="job">
-        <div class="job-header">
+      <div class="job-card">
+        <div class="job-row">
           <div>
             <span class="job-title">Customer Care Manager</span>
             <span class="job-org"> &middot; Shaw Communications</span>
           </div>
           <span class="job-date">2018 &ndash; 2022</span>
         </div>
-        <button class="expand-btn" onclick="toggleJob(this)">
-          <span>Details</span>
+        <button class="expand-btn" onclick="toggleJob(this)">Details
           <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
         <div class="job-details">
@@ -159,16 +102,15 @@
         </div>
       </div>
 
-      <div class="job">
-        <div class="job-header">
+      <div class="job-card">
+        <div class="job-row">
           <div>
             <span class="job-title">Technical Support Supervisor</span>
             <span class="job-org"> &middot; Shaw Communications</span>
           </div>
           <span class="job-date">2014 &ndash; 2018</span>
         </div>
-        <button class="expand-btn" onclick="toggleJob(this)">
-          <span>Details</span>
+        <button class="expand-btn" onclick="toggleJob(this)">Details
           <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
         <div class="job-details">
@@ -179,17 +121,17 @@
           </ul>
         </div>
       </div>
-    </section>
+    </div>
 
-    <section class="resume-section">
+    <div class="section-block">
       <h2>Education</h2>
-      <div class="education-item">
-        <span class="education-name">Red River College &mdash; Business Administration</span>
-        <span class="education-date">2010 &ndash; 2011</span>
+      <div class="edu-row">
+        <span class="edu-name">Red River College &mdash; Business Administration</span>
+        <span class="edu-date">2010 &ndash; 2011</span>
       </div>
-    </section>
+    </div>
 
-    <section class="resume-section">
+    <div class="section-block">
       <h2>Core Competencies</h2>
       <div class="competencies-grid">
         <div class="comp-group">
@@ -231,12 +173,10 @@
           </ul>
         </div>
       </div>
-    </section>
+    </div>
 
-    <div class="resume-actions">
-      <a href="https://docs.google.com/document/d/1b_m5CgLJ-T2R2I966cG_WogFkdqzdAmi2d_Jv9F0HJc/export?format=pdf" class="btn btn-primary" target="_blank" rel="noopener">
-        Download PDF
-      </a>
+    <div class="action-row">
+      <a href="https://docs.google.com/document/d/1b_m5CgLJ-T2R2I966cG_WogFkdqzdAmi2d_Jv9F0HJc/export?format=pdf" class="btn btn-primary" target="_blank" rel="noopener">Download PDF</a>
       <a href="mailto:Bayarddevries@Gmail.com" class="btn btn-secondary">Get in Touch</a>
     </div>
   </main>
