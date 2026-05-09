@@ -7,6 +7,9 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: https://bayarddevries.github.io/devriesdynamics-nightly/
     permissions:
       contents: read
       pages: write
