@@ -98,6 +98,7 @@
     // ============================================
     // THREE.JS BACKGROUND — Particle Field
     // ============================================
+    try {
     (function() {
       const container = document.getElementById('projects-bg');
       if (!container) return;
@@ -169,6 +170,7 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
       });
     })();
+    } catch(e) { console.error('Three.js background error:', e); }
 
     // ============================================
     // PROJECT CARDS RENDER
