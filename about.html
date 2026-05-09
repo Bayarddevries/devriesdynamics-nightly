@@ -3,8 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About — Bayard de Vries</title>
+  <title>About — Bayard deVries</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    .about-page { max-width: 680px; margin: 0 auto; padding: 2.5rem 1rem 4rem; }
+
+    .about-header { text-align: center; padding: 1.5rem 0 2rem; border-bottom: 2px solid var(--color-border); margin-bottom: 2rem; }
+    .about-header h1 { font-size: 1.75rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .about-header .tagline { color: var(--color-text-muted); font-size: 0.9rem; margin-top: 0.25rem; }
+    .about-header .contact-line { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem 1.25rem; margin-top: 1rem; font-size: 0.8rem; }
+    .about-header .contact-line a { color: var(--color-accent); text-decoration: none; }
+    .about-header .contact-line a:hover { text-decoration: underline; }
+
+    .about-section { margin-bottom: 2.25rem; }
+    .about-section h2 { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-muted); border-bottom: 1px solid var(--color-border); padding-bottom: 0.4rem; margin-bottom: 1rem; }
+
+    .about-intro { font-size: 0.95rem; line-height: 1.75; color: var(--color-text); }
+
+    .competencies-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.25rem; }
+    .comp-group h3 { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 0.5rem; }
+    .comp-group ul { list-style: none; }
+    .comp-group li { font-size: 0.8rem; color: var(--color-text-muted); margin-bottom: 0.25rem; padding-left: 0.75rem; position: relative; }
+    .comp-group li::before { content: '—'; position: absolute; left: 0; color: var(--color-border); }
+
+    .philosophy { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; padding: 1.5rem; }
+    .philosophy h3 { font-size: 0.85rem; font-weight: 600; margin-bottom: 0.6rem; }
+    .philosophy p { font-size: 0.875rem; color: var(--color-text-muted); line-height: 1.65; }
+
+    .about-actions { display: flex; gap: 0.75rem; justify-content: center; margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--color-border); }
+    .btn { display: inline-block; padding: 0.6rem 1.25rem; border-radius: 4px; font-size: 0.85rem; text-decoration: none; transition: background 0.15s ease; }
+    .btn-primary { background: var(--color-accent); color: #fff; }
+    .btn-primary:hover { background: var(--color-accent-hover); }
+    .btn-secondary { background: var(--color-surface); color: var(--color-text); border: 1px solid var(--color-border); }
+    .btn-secondary:hover { background: var(--color-bg); }
+
+    @media (max-width: 600px) {
+      .about-header h1 { font-size: 1.4rem; }
+      .about-header .contact-line { gap: 0.4rem 1rem; }
+      .about-actions { flex-direction: column; }
+      .about-actions .btn { text-align: center; }
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -16,31 +55,97 @@
     </nav>
   </header>
 
-  <main class="page-content">
-    <section class="hero compact">
+  <main class="about-page">
+    <div class="about-header">
       <h1>About</h1>
+      <p class="tagline">Operations &middot; Project Leadership &middot; Digital Innovation</p>
+      <div class="contact-line">
+        <span>Winnipeg MB</span>
+        <a href="tel:204-510-3865">204-510-3865</a>
+        <a href="mailto:Bayarddevries@Gmail.com">Bayarddevries@Gmail.com</a>
+        <a href="https://linkedin.com/in/bayard-devries" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+
+    <section class="about-section">
+      <h2>Background</h2>
+      <p class="about-intro">
+        Operations and project leader with 15+ years managing cross-functional teams, multi-million-dollar budgets, and complex stakeholder environments. Track record of delivering outcomes under ambiguity — from leading a department-wide Work from Home transition during a pandemic to building a digital archival platform from the ground up.
+      </p>
+      <p class="about-intro" style="margin-top: 1rem;">
+        Most recently at the Red River Metis National Heritage Centre, where I coordinated facility design translation, built and deployed the Shoebox cultural archive application end-to-end, and led digital exhibit development from research through content creation.
+      </p>
     </section>
 
-    <section class="bio">
-      <p>I'm a full-stack developer with a focus on building interactive cultural and historical projects. My work blends data visualization, mapping, and narrative to create engaging digital experiences.</p>
-      
-      <h2>Skills</h2>
-      <ul class="skills-list">
-        <li>TypeScript & JavaScript</li>
-        <li>React & Next.js</li>
-        <li>Node.js</li>
-        <li>D3.js & Data Visualization</li>
-        <li>Leaflet & Mapping</li>
-        <li>PostgreSQL & SQLite</li>
-      </ul>
-
-      <h2>Contact</h2>
-      <p><a href="mailto:bayard@devriesdynamics.com">bayard@devriesdynamics.com</a></p>
+    <section class="about-section">
+      <h2>Core Competencies</h2>
+      <div class="competencies-grid">
+        <div class="comp-group">
+          <h3>Project Management</h3>
+          <ul>
+            <li>Cross-Functional Coordination</li>
+            <li>Stakeholder Management</li>
+            <li>PM Framework Development</li>
+            <li>Change Management</li>
+            <li>Workflow Design</li>
+          </ul>
+        </div>
+        <div class="comp-group">
+          <h3>Operations</h3>
+          <ul>
+            <li>Budget Forecasting</li>
+            <li>Federal Grant Administration</li>
+            <li>Multi-Million Dollar Portfolio Oversight</li>
+            <li>Commission Design</li>
+          </ul>
+        </div>
+        <div class="comp-group">
+          <h3>Digital & Innovation</h3>
+          <ul>
+            <li>Full-Lifecycle Software Delivery</li>
+            <li>UX Strategy</li>
+            <li>Technical Product Roadmaps</li>
+            <li>Generative AI & Agentic Workflows</li>
+            <li>Data Visualization</li>
+          </ul>
+        </div>
+        <div class="comp-group">
+          <h3>Leadership</h3>
+          <ul>
+            <li>Team Building (up to 8 direct + 20 indirect)</li>
+            <li>Executive Stakeholder Relations</li>
+            <li>Intergovernmental Liaison</li>
+            <li>Community Engagement</li>
+          </ul>
+        </div>
+      </div>
     </section>
+
+    <section class="about-section">
+      <h2>Approach</h2>
+      <div class="philosophy">
+        <h3>Delivering outcomes under ambiguity</h3>
+        <p>
+          Whether navigating a department-wide WFH transition during a period of high uncertainty or building a digital archival platform from scratch — the through-line is identifying what needs to happen next, aligning the people who can make it happen, and driving to a result. I build frameworks where none exist, bring order to complex stakeholder environments, and ship things that last.
+        </p>
+      </div>
+    </section>
+
+    <section class="about-section">
+      <h2>Currently</h2>
+      <p class="about-intro">
+        Based in Winnipeg. Open to project leadership, operations, and digital transformation opportunities where the work has cultural weight and lasting impact.
+      </p>
+    </section>
+
+    <div class="about-actions">
+      <a href="resume.html" class="btn btn-secondary">View Resume</a>
+      <a href="mailto:Bayarddevries@Gmail.com" class="btn btn-primary">Get in Touch</a>
+    </div>
   </main>
 
   <footer>
-    <p>&copy; 2026 Bayard de Vries</p>
+    <p>&copy; 2026 Bayard deVries</p>
   </footer>
 
   <script src="script.js"></script>
