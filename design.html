@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design System — Bayard deVries</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="design.html" class="active">Design</a>
+      <a href="resume.html">Resume</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1 class="brass-name">Design System</h1>
+      <p class="tagline">Visual experiments for devriesdynamics.com</p>
+      <p class="summary">Exploring shaders, textures, and interactive effects using our color palette.</p>
+    </section>
+
+    <!-- COLOR PALETTE -->
+    <section class="demo-section">
+      <h2 class="demo-title">Full Color Palette</h2>
+      <p class="demo-desc">Expanded from our forest green + brass foundation with Prairie-inspired accents.</p>
+      
+      <h3 style="color: var(--color-text-muted); font-size: 0.9rem; margin: 2rem 0 1rem;">Core</h3>
+      <div class="palette-grid">
+        <div class="swatch" style="background: var(--color-bg); border: 1px solid var(--color-border);">
+          <span class="swatch-name" style="color: var(--color-text);">Bg Dark</span>
+          <span class="swatch-hex" style="color: var(--color-text);">#131A0F</span>
+        </div>
+        <div class="swatch" style="background: var(--color-surface);">
+          <span class="swatch-name" style="color: var(--color-text);">Surface</span>
+          <span class="swatch-hex" style="color: var(--color-text);">#1C2416</span>
+        </div>
+        <div class="swatch" style="background: var(--color-text);">
+          <span class="swatch-name" style="color: var(--color-bg);">Text</span>
+          <span class="swatch-hex" style="color: var(--color-bg);">#E8E0CC</span>
+        </div>
+        <div class="swatch" style="background: var(--color-text-muted);">
+          <span class="swatch-name" style="color: var(--color-bg);">Text Muted</span>
+          <span class="swatch-hex" style="color: var(--color-bg);">#8A9A78</span>
+        </div>
+      </div>
+
+      <h3 style="color: var(--color-text-muted); font-size: 0.9rem; margin: 2rem 0 1rem;">Primary — Forest</h3>
+      <div class="palette-grid">
+        <div class="swatch" style="background: var(--color-green);">
+          <span class="swatch-name">Green</span>
+          <span class="swatch-hex">#6B8F52</span>
+        </div>
+        <div class="swatch" style="background: var(--color-green-bright);">
+          <span class="swatch-name">Green Bright</span>
+          <span class="swatch-hex">#8FB872</span>
+        </div>
+        <div class="swatch" style="background: var(--color-green-dim);">
+          <span class="swatch-name">Green Dim</span>
+          <span class="swatch-hex">#3D5429</span>
+        </div>
+      </div>
+
+      <h3 style="color: var(--color-text-muted); font-size: 0.9rem; margin: 2rem 0 1rem;">Secondary — Brass</h3>
+      <div class="palette-grid">
+        <div class="swatch" style="background: var(--color-brass);">
+          <span class="swatch-name">Brass</span>
+          <span class="swatch-hex">#C49A3A</span>
+        </div>
+        <div class="swatch" style="background: var(--color-brass-light);">
+          <span class="swatch-name">Brass Light</span>
+          <span class="swatch-hex">#E8C86B</span>
+        </div>
+        <div class="swatch" style="background: var(--color-brass-dim);">
+          <span class="swatch-name">Brass Dim</span>
+          <span class="swatch-hex">#8A6E28</span>
+        </div>
+      </div>
+
+      <h3 style="color: var(--color-text-muted); font-size: 0.9rem; margin: 2rem 0 1rem;">Accent — Prairie</h3>
+      <div class="palette-grid">
+        <div class="swatch" style="background: var(--color-sky);">
+          <span class="swatch-name">Sky</span>
+          <span class="swatch-hex">#7BA3C9</span>
+        </div>
+        <div class="swatch" style="background: var(--color-sage);">
+          <span class="swatch-name">Sage</span>
+          <span class="swatch-hex">#8FAE7C</span>
+        </div>
+        <div class="swatch" style="background: var(--color-wheat);">
+          <span class="swatch-name">Wheat</span>
+          <span class="swatch-hex">#D4B847</span>
+        </div>
+        <div class="swatch" style="background: var(--color-wine);">
+          <span class="swatch-name">Wine</span>
+          <span class="swatch-hex">#6B1C23</span>
+        </div>
+        <div class="swatch" style="background: var(--color-wood);">
+          <span class="swatch-name">Wood</span>
+          <span class="swatch-hex">#5C4033</span>
+        </div>
+        <div class="swatch" style="background: var(--color-coral);">
+          <span class="swatch-name">Coral</span>
+          <span class="swatch-hex">#C9856B</span>
+        </div>
+        <div class="swatch" style="background: var(--color-clay);">
+          <span class="swatch-name">Clay</span>
+          <span class="swatch-hex">#9C7B5C</span>
+        </div>
+        <div class="swatch" style="background: var(--color-mist);">
+          <span class="swatch-name">Mist</span>
+          <span class="swatch-hex">#A8B5A8</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- FILM GRAIN -->
+    <section class="demo-section">
+      <h2 class="demo-title">Film Grain Texture</h2>
+      <p class="demo-desc">Subtle animated noise overlay — gives that heritage photo feel. Great for dark backgrounds.</p>
+      <div class="grain-demo">
+        <div class="grain-overlay"></div>
+        <div class="demo-content">
+          <p style="color: var(--color-text); font-size: 1.1rem;">Heritage Photo Feel</p>
+          <p style="color: var(--color-text-muted); font-size: 0.85rem; margin-top: 0.5rem;">Animated SVG noise filter</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- GRADIENT FLOW -->
+    <section class="demo-section">
+      <h2 class="demo-title">Gradient Flow</h2>
+      <p class="demo-desc">Slow-shifting gradient using our accent colors — good for hero sections or card borders.</p>
+      <div class="gradient-flow">
+        <div class="demo-content">
+          <p style="color: var(--color-text);">Animated 8s cycle</p>
+          <p style="color: var(--color-text-muted); font-size: 0.8rem; margin-top: 0.25rem;">Green → Brass → Wine</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FIREFLIES -->
+    <section class="demo-section">
+      <h2 class="demo-title">Firefly Particles</h2>
+      <p class="demo-desc">Floating brass particles — evokes Manitoba summer evenings. Pure CSS, no JS required.</p>
+      <div class="firefly-demo">
+        <div class="firefly"></div>
+        <div class="firefly"></div>
+        <div class="firefly"></div>
+        <div class="firefly"></div>
+        <div class="firefly"></div>
+        <div class="firefly"></div>
+        <div class="firefly"></div>
+        <div class="firefly"></div>
+        <div class="demo-content">
+          <p style="color: var(--color-brass-light);">Move cursor nearby</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- GLASSMORPHISM -->
+    <section class="demo-section">
+      <h2 class="demo-title">Glassmorphism Cards</h2>
+      <p class="demo-desc">Frosted glass effect with backdrop-filter — works great over any background.</p>
+      <div class="glass-demo">
+        <div class="glass-card">
+          <h4>Shoebox V2</h4>
+          <p>Photo archive with geolocation</p>
+        </div>
+        <div class="glass-card">
+          <h4>Homeland Map</h4>
+          <p>Interactive D3.js visualization</p>
+        </div>
+        <div class="glass-card">
+          <h4>RRMNHC</h4>
+          <p>Heritage site redesign</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- MOUSE TRAIL -->
+    <section class="demo-section">
+      <h2 class="demo-title">Mouse Trail</h2>
+      <p class="demo-desc">Interactive trail effect — move your mouse around. Lightweight JavaScript.</p>
+      <div class="trail-demo" id="trailDemo">
+        <div class="demo-content">
+          <p style="color: var(--color-text-muted);">Move your cursor here</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOVER CARDS -->
+    <section class="demo-section">
+      <h2 class="demo-title">Interactive Hover Cards</h2>
+      <p class="demo-desc">Animated border and lift effect — gradient line draws on hover.</p>
+      <div class="hover-cards">
+        <div class="hover-card">
+          <h4>Project Alpha</h4>
+          <p>Operations overhaul delivered 2 weeks early</p>
+        </div>
+        <div class="hover-card">
+          <h4>Project Beta</h4>
+          <p>Team of 8, zero turnover during transition</p>
+        </div>
+        <div class="hover-card">
+          <h4>Project Gamma</h4>
+          <p>Built from scratch with limited budget</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- NOTES -->
+    <section class="demo-section">
+      <h2 class="demo-title">Questions for You</h2>
+      <ul style="color: var(--color-text-muted); line-height: 2; margin-left: 1.5rem;">
+        <li>Which effects resonate most?</li>
+        <li>Want me to wire any of these into the main site?</li>
+        <li>Should we try Three.js for something more dramatic?</li>
+        <li>Any other directions we should explore?</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer>
+    <p class="site-by">Bayard deVries · <a href="index.html" style="color: var(--color-brass);">Home</a></p>
+  </footer>
+
+  <script>
+    // Mouse trail effect
+    const trailDemo = document.getElementById('trailDemo');
+    
+    trailDemo.addEventListener('mousemove', (e) => {
+      const rect = trailDemo.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      const dot = document.createElement('div');
+      dot.className = 'trail-dot';
+      dot.style.left = (x - 6) + 'px';
+      dot.style.top = (y - 6) + 'px';
+      
+      trailDemo.appendChild(dot);
+      
+      setTimeout(() => dot.remove(), 1000);
+    });
+  </script>
+</body>
+</html>

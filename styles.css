@@ -7,18 +7,39 @@
 
 /* Variables — Dark Forest + Brass */
 :root {
+  /* Core */
   --color-bg: #131A0F;
   --color-surface: #1C2416;
   --color-surface-raised: #242E1C;
   --color-text: #E8E0CC;
   --color-text-muted: #8A9A78;
   --color-border: #2E3A25;
+
+  /* Primary — Forest Green */
   --color-green: #6B8F52;
   --color-green-bright: #8FB872;
   --color-green-dim: #3D5429;
+
+  /* Secondary — Brass */
   --color-brass: #C49A3A;
   --color-brass-dim: #8A6E28;
   --color-brass-glow: rgba(196, 154, 58, 0.15);
+  --color-brass-light: #E8C86B;
+
+  /* Accent — Expanded Palette */
+  --color-sky: #7BA3C9;
+  --color-sage: #8FAE7C;
+  --color-wine: #6B1C23;
+  --color-wheat: #D4B847;
+  --color-wood: #5C4033;
+  --color-coral: #C9856B;
+  --color-clay: #9C7B5C;
+  --color-mist: #A8B5A8;
+
+  /* Legacy (light mode) */
+  --color-cream: #F4F1EA;
+  --color-cream-dark: #E8E0CC;
+
   --font-heading: 'Space Grotesk', sans-serif;
   --font-body: 'DM Sans', sans-serif;
   --max-width: 900px;
@@ -682,6 +703,306 @@ footer {
   font-family: var(--font-heading);
 }
 
+/* ============================================
+   DESIGN PAGE STYLES
+   ============================================ */
+
+/* Color Palette */
+.palette-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.swatch {
+  border-radius: 8px;
+  padding: 1rem;
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  transition: transform 0.2s ease;
+  cursor: default;
+}
+
+.swatch:hover {
+  transform: scale(1.05);
+}
+
+.swatch-name {
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.swatch-hex {
+  opacity: 0.7;
+  font-family: monospace;
+  font-size: 0.7rem;
+}
+
+/* Demo Sections */
+.demo-section {
+  margin: 4rem 0;
+  padding: 2rem;
+  background: var(--color-surface);
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+}
+
+.demo-title {
+  font-size: 1.25rem;
+  color: var(--color-brass);
+  margin-bottom: 0.5rem;
+}
+
+.demo-desc {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Film Grain Demo */
+.grain-demo {
+  position: relative;
+  height: 200px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-surface) 100%);
+}
+
+.grain-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.06;
+  pointer-events: none;
+  animation: grain 0.5s steps(10) infinite;
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-2%, -2%); }
+  20% { transform: translate(2%, 2%); }
+  30% { transform: translate(-1%, 2%); }
+  40% { transform: translate(2%, -1%); }
+  50% { transform: translate(-2%, 1%); }
+  60% { transform: translate(1%, -2%); }
+  70% { transform: translate(-1%, -1%); }
+  80% { transform: translate(1%, 1%); }
+  90% { transform: translate(2%, -2%); }
+}
+
+.grain-demo .demo-content {
+  position: relative;
+  z-index: 1;
+  padding: 2rem;
+  text-align: center;
+}
+
+/* Gradient Flow Demo */
+.gradient-flow {
+  height: 200px;
+  border-radius: 8px;
+  background: linear-gradient(270deg, var(--color-green-dim), var(--color-brass-dim), var(--color-wine), var(--color-green-dim));
+  background-size: 400% 400%;
+  animation: gradientShift 8s ease infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.gradient-flow .demo-content {
+  background: rgba(19, 26, 15, 0.85);
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  backdrop-filter: blur(8px);
+}
+
+/* Firefly Particles Demo */
+.firefly-demo {
+  position: relative;
+  height: 200px;
+  border-radius: 8px;
+  background: radial-gradient(ellipse at bottom, #1a2416 0%, var(--color-bg) 100%);
+  overflow: hidden;
+}
+
+.firefly {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--color-brass-light);
+  border-radius: 50%;
+  box-shadow: 0 0 8px 2px var(--color-brass-glow);
+  animation: float 6s ease-in-out infinite;
+}
+
+.firefly:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
+.firefly:nth-child(2) { left: 25%; top: 60%; animation-delay: 1s; }
+.firefly:nth-child(3) { left: 40%; top: 30%; animation-delay: 2s; }
+.firefly:nth-child(4) { left: 55%; top: 70%; animation-delay: 0.5s; }
+.firefly:nth-child(5) { left: 70%; top: 40%; animation-delay: 1.5s; }
+.firefly:nth-child(6) { left: 85%; top: 80%; animation-delay: 2.5s; }
+.firefly:nth-child(7) { left: 15%; top: 80%; animation-delay: 3s; }
+.firefly:nth-child(8) { left: 60%; top: 15%; animation-delay: 3.5s; }
+
+@keyframes float {
+  0%, 100% { 
+    transform: translate(0, 0) scale(1); 
+    opacity: 0.3;
+  }
+  25% { 
+    transform: translate(20px, -30px) scale(1.2); 
+    opacity: 1;
+  }
+  50% { 
+    transform: translate(-10px, -50px) scale(0.8); 
+    opacity: 0.6;
+  }
+  75% { 
+    transform: translate(15px, -20px) scale(1.1); 
+    opacity: 1;
+  }
+}
+
+.firefly-demo .demo-content {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-surface);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+}
+
+/* Glassmorphism Cards */
+.glass-demo {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.glass-card {
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: rgba(28, 36, 22, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(196, 154, 58, 0.2);
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  background: rgba(28, 36, 22, 0.8);
+  border-color: rgba(196, 154, 58, 0.4);
+  transform: translateY(-4px);
+}
+
+.glass-card h4 {
+  color: var(--color-brass);
+  margin-bottom: 0.5rem;
+}
+
+.glass-card p {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+/* Mouse Trail Demo */
+.trail-demo {
+  position: relative;
+  height: 200px;
+  border-radius: 8px;
+  background: var(--color-bg);
+  overflow: hidden;
+  cursor: crosshair;
+}
+
+.trail-dot {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color-brass);
+  pointer-events: none;
+  opacity: 0.8;
+  animation: trailFade 1s ease-out forwards;
+}
+
+@keyframes trailFade {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(0); opacity: 0; }
+}
+
+.trail-demo .demo-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  pointer-events: none;
+}
+
+/* Interactive Hover Cards */
+.hover-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.hover-card {
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.hover-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-green), var(--color-brass), var(--color-wine));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.hover-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--color-brass);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+}
+
+.hover-card:hover::before {
+  transform: scaleX(1);
+}
+
+.hover-card h4 {
+  color: var(--color-text);
+  margin-bottom: 0.5rem;
+}
+
+.hover-card p {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
 /* Responsive */
 @media (max-width: 600px) {
   .hero h1 { font-size: 2rem; }
@@ -689,4 +1010,5 @@ footer {
   .stat-number { font-size: 1.4rem; }
   nav { gap: 1.25rem; }
   .competencies-grid { grid-template-columns: 1fr 1fr; }
+  .glass-demo, .hover-cards { grid-template-columns: 1fr; }
 }
