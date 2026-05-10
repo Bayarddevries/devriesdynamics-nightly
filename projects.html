@@ -110,23 +110,13 @@
       var html = '';
       for (var i = 0; i < projects.length; i++) {
         var p = projects[i];
-        html += '<article class="project-card-interactive" data-index="' + i + '" style="--accent: ' + p.color + '">';
+        html += '<article class="project-card-interactive" data-index="' + i + '" style="--accent: ' + p.color + '" onclick="openModal(' + i + ')">';
         html += '<h3>' + p.title + '</h3>';
         html += '<p>' + p.shortDesc + '</p>';
         html += '<span class="card-year">' + p.year + '</span>';
         html += '</article>';
       }
       cardsContainer.innerHTML = html;
-      
-      // Add click handlers via delegation
-      cardsContainer.addEventListener('click', function(e) {
-        var card = e.target.closest('.project-card-interactive');
-        if (card) {
-          var idx = parseInt(card.getAttribute('data-index'), 10);
-          currentProjectIndex = idx;
-          openModal(idx);
-        }
-      });
     }
     }
 
@@ -202,9 +192,7 @@
     // ============================================
     // INIT
     // ============================================
-    document.addEventListener('DOMContentLoaded', function() {
-      renderCards();
-    });
+    renderCards();
   </script>
 </body>
 </html>
