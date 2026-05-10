@@ -118,16 +118,16 @@
       }
       cardsContainer.innerHTML = html;
       
-      // Add click handlers
-      var cards = document.querySelectorAll('.project-card-interactive');
-      for (var j = 0; j < cards.length; j++) {
-        cards[j].addEventListener('click', (function(idx) {
-          return function() {
-            currentProjectIndex = idx;
-            openModal(idx);
-          };
-        })(j));
-      }
+      // Add click handlers via delegation
+      cardsContainer.addEventListener('click', function(e) {
+        var card = e.target.closest('.project-card-interactive');
+        if (card) {
+          var idx = parseInt(card.getAttribute('data-index'), 10);
+          currentProjectIndex = idx;
+          openModal(idx);
+        }
+      });
+    }
     }
 
     function renderDots() {
@@ -202,7 +202,9 @@
     // ============================================
     // INIT
     // ============================================
-    renderCards();
+    document.addEventListener('DOMContentLoaded', function() {
+      renderCards();
+    });
   </script>
 </body>
 </html>
