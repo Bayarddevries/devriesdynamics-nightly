@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <canvas id="bgParticles" class="bg-particles"></canvas>
   <header>
     <nav>
       <a href="index.html">Home</a>
@@ -116,20 +117,38 @@
       const material = new THREE.PointsMaterial({size:0.04, color:'#A67C29'});
       const pts = new THREE.Points(particles, material);
       scene.add(pts);
-      return { tick:()=>{pts.rotation.y+=0.001;}};
+
+    // ------------ Background particle field (full‑screen) ------------
+    initScene(document.getElementById('bgParticles'), (scene)=>{
+      const count = 2500;
+      const range = 6;
+      const positions = new Float32Array(count*3);
+      for(let i=0;i<count;i++){
+        positions[i*3] = (Math.random()-0.5)*range;
+        positions[i*3+1] = (Math.random()-0.5)*range;
+        positions[i*3+2] = (Math.random()-0.5)*range;
+      }
+      const geometry = new THREE.BufferGeometry();
+      geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions,3));
+      const material = new THREE.PointsMaterial({size:0.04, color:'#A67C29', transparent:true, opacity:0.7});
+      const particles = new THREE.Points(geometry, material);
+      scene.add(particles);
+      return { tick:()=>{ particles.rotation.y += 0.0003; } };
     });
-    </script>
-  <div class="project-modal" id="projectModal">
-    <button class="modal-close" id="modalClose">&times;</button>
-    <div class="modal-nav modal-prev" id="modalPrev">‹</div>
-    <div class="modal-nav modal-next" id="modalNext">›</div>
-    <div class="modal-content" id="modalContent">
-      <!-- Populated by JS -->
+</section>
+    
+    <!-- Project Detail Modal -->
+    <div class="project-modal" id="projectModal">
+      <button class="modal-close" id="modalClose">&times;</button>
+      <div class="modal-nav modal-prev" id="modalPrev">‹</div>
+      <div class="modal-nav modal-next" id="modalNext">›</div>
+      <div class="modal-content" id="modalContent">
+        <!-- Populated by JS -->
+      </div>
+      <div class="modal-dots" id="modalDots">
+        <!-- Populated by JS -->
+      </div>
     </div>
-    <div class="modal-dots" id="modalDots">
-      <!-- Populated by JS -->
-    </div>
-  </div>
 
   <footer>
     <p class="site-by">Bayard deVries · <a href="index.html" style="color: var(--color-brass);">Home</a></p>

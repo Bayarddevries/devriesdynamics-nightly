@@ -530,6 +530,18 @@ main {
    
    /* Ensure later demos stack nicely */
    .demo-section { margin-bottom: 3rem; }
+
+/* Background particle field canvas */
+.bg-particles {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  background: var(--color-bg);
+}
+.bg-particles canvas { opacity: 0.85; }
    
 
   position: relative;
