@@ -443,62 +443,95 @@ main {
 }
 
 /* Project Cards Grid */
-.project-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.5rem;
-  padding: 2rem 0;
-  position: relative;
-  z-index: 1;
-}
+   .project-cards {
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+     gap: 1.5rem;
+     padding: 2rem 0;
+     position: relative;
+     z-index: 1;
+   }
+   
+   /* Interactive Project Card */
+   .project-card-interactive {
+     position: relative;
+     background: rgba(28, 36, 22, 0.85);
+     border: 1px solid var(--color-border);
+     border-radius: 12px;
+     padding: 1.5rem;
+     cursor: pointer;
+     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+     overflow: hidden;
+   }
+   
+   .project-card-interactive::before {
+     content: '';
+     position: absolute;
+     top: 0;
+     left: 0;
+     right: 0;
+     bottom: 0;
+     background: linear-gradient(135deg, var(--accent) 0%, transparent 60%);
+     opacity: 0;
+     transition: opacity 0.3s ease;
+   }
+   
+   .project-card-interactive:hover {
+     transform: translateY(-6px);
+     border-color: var(--accent);
+     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+   }
+   
+   .project-card-interactive:hover::before {
+     opacity: 0.15;
+   }
+   
+   .project-card-interactive h3 {
+     font-family: var(--font-heading);
+     font-size: 1.1rem;
+     font-weight: 500;
+     color: var(--color-text);
+     margin-bottom: 0.5rem;
+     position: relative;
+     z-index: 1;
+   }
+   
+   .project-card-interactive p {
+     font-size: 0.9rem;
+   }
+   
+   /* Three.js demo containers */
+   .three-demo {
+     position: relative;
+     width: 100%;
+     height: 300px; /* fixed height for demo canvas */
+     margin: 2rem 0;
+     background: var(--color-surface);
+     border: 1px solid var(--color-border);
+     border-radius: 8px;
+     overflow: hidden;
+   }
+   
+   .three-demo canvas {
+     display: block;
+     width: 100%;
+     height: 100%;
+   }
+   
+   .demo-label {
+     position: absolute;
+     bottom: 0.5rem;
+     left: 50%;
+     transform: translateX(-50%);
+     color: var(--color-text-muted);
+     font-size: 0.8rem;
+     pointer-events: none;
+   }
+   
+   /* Ensure later demos stack nicely */
+   .demo-section { margin-bottom: 3rem; }
+   
 
-/* Interactive Project Card */
-.project-card-interactive {
-  position: relative;
-  background: rgba(28, 36, 22, 0.85);
-  border: 1px solid var(--color-border);
-  border-radius: 12px;
-  padding: 1.5rem;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: hidden;
-}
-
-.project-card-interactive::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, var(--accent) 0%, transparent 60%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.project-card-interactive:hover {
-  transform: translateY(-6px);
-  border-color: var(--accent);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
-}
-
-.project-card-interactive:hover::before {
-  opacity: 0.15;
-}
-
-.project-card-interactive h3 {
-  font-family: var(--font-heading);
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: var(--color-text);
-  margin-bottom: 0.5rem;
-  position: relative;
-  z-index: 1;
-}
-
-.project-card-interactive p {
-  font-size: 0.9rem;
-  color: var(--color-text-muted);
   position: relative;
   z-index: 1;
 }
@@ -1292,19 +1325,8 @@ footer {
 /* Three.js Demo Containers */
 .three-demo {
   position: relative;
-  height: 280px;
-  border-radius: 8px;
-  background: var(--color-bg);
-  overflow: hidden;
-  cursor: grab;
-}
-
-.three-demo:active {
-  cursor: grabbing;
-}
-
-.three-demo canvas {
-  display: block;
+/* NOTE: .three-demo styling is defined earlier (lines ~503) and includes consistent sizing, background, border, and canvas handling. This block is intentionally left empty to avoid duplicate definitions. */
+  height: 100%;
 }
 
 /* Responsive */

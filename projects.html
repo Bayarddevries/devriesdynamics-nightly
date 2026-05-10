@@ -28,6 +28,97 @@
   </main>
 
   <!-- Project Detail Modal -->
+    <!-- ============================= -->
+    <!-- Three.js Demo (test page) -->
+    <!-- ============================= -->
+    <section class="three-demo" style="padding: 2rem 0; background: var(--color-bg);">
+      <h2 style="text-align:center; margin-bottom:1rem; color:var(--color-brass);">Three.js Demo</h2>
+      <div class="demo-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem;justify-items:center;">
+        <canvas class="three-canvas" id="demoCube" width="300" height="200"></canvas>
+        <canvas class="three-canvas" id="demoModel" width="300" height="200"></canvas>
+        <canvas class="three-canvas" id="demoParticles" width="300" height="200"></canvas>
+      </div>
+      <p style="text-align:center;margin-top:1rem;font-size:0.9rem;color:var(--color-text-muted);">(Hover / drag to orbit each scene)</p>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/three@0.166.1/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.166.1/examples/jsm/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.166.1/examples/jsm/loaders/GLTFLoader.js"></script>
+    <script>
+    // ------------------- Helper to init a scene -------------------
+    function initScene(canvas, setupFn) {
+      const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
+      const width = canvas.clientWidth; const height = canvas.clientHeight;
+      renderer.setSize(width, height, false);
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(45, width/height, 0.1, 100);
+      camera.position.set(2,2,3);
+      const controls = new THREE.OrbitControls(camera, canvas);
+      controls.enableDamping = true;
+      const ambient = new THREE.AmbientLight(0xffffff,0.8);
+      scene.add(ambient);
+      const dir = new THREE.DirectionalLight(0xffffff,0.5);
+      dir.position.set(5,5,5);
+      scene.add(dir);
+      // custom objects from user‑provided callback
+      const obj = setupFn(scene, camera);
+      // animation loop
+      function animate(){
+        requestAnimationFrame(animate);
+        if(obj && obj.tick) obj.tick();
+        controls.update();
+        renderer.render(scene,camera);
+      }
+      animate();
+      // handle resize
+      window.addEventListener('resize',()=>{
+        const w = canvas.clientWidth, h = canvas.clientHeight;
+        renderer.setSize(w,h,false);
+        camera.aspect = w/h; camera.updateProjectionMatrix();
+      });
+    }
+    // ------------------- Demo 1: Rotating Cube -------------------
+    initScene(document.getElementById('demoCube'), (scene)=>{
+      const geom = new THREE.BoxGeometry(1,1,1);
+      const mat = new THREE.MeshStandardMaterial({color:'#C49A3A', roughness:0.4, metalness:0.2});
+      const cube = new THREE.Mesh(geom, mat);
+      scene.add(cube);
+      return { tick:()=>{cube.rotation.x+=0.005; cube.rotation.y+=0.003;}};
+    });
+    // ------------------- Demo 2: GLTF Model (placeholder) ---------
+    initScene(document.getElementById('demoModel'), (scene)=>{
+      const loader = new THREE.GLTFLoader();
+      // placeholder cheap geometry if model fails to load
+      const fallback = new THREE.Mesh(
+        new THREE.SphereGeometry(0.8,32,32),
+        new THREE.MeshStandardMaterial({color:'#6B8F52'})
+      );
+      scene.add(fallback);
+      loader.load('assets/models/placeholder.glb', (gltf)=>{
+        scene.remove(fallback);
+        const model = gltf.scene;
+        model.scale.set(0.6,0.6,0.6);
+        scene.add(model);
+      }, undefined, (err)=>{ console.warn('GLTF load error – using fallback',err); });
+      return {};
+    });
+    // ------------------- Demo 3: Simple Particle Field -------------
+    initScene(document.getElementById('demoParticles'), (scene)=>{
+      const particles = new THREE.BufferGeometry();
+      const count = 5000;
+      const positions = new Float32Array(count*3);
+      for(let i=0;i<count;i++){
+        positions[i*3] = (Math.random()-0.5)*6;
+        positions[i*3+1] = (Math.random()-0.5)*6;
+        positions[i*3+2] = (Math.random()-0.5)*6;
+      }
+      particles.setAttribute('position', new THREE.BufferAttribute(positions,3));
+      const material = new THREE.PointsMaterial({size:0.04, color:'#A67C29'});
+      const pts = new THREE.Points(particles, material);
+      scene.add(pts);
+      return { tick:()=>{pts.rotation.y+=0.001;}};
+    });
+    </script>
   <div class="project-modal" id="projectModal">
     <button class="modal-close" id="modalClose">&times;</button>
     <div class="modal-nav modal-prev" id="modalPrev">‹</div>
