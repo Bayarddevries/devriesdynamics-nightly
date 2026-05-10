@@ -52,41 +52,46 @@
       {
         id: 'shoebox',
         title: 'Shoebox V2',
-        shortDesc: 'Interactive Métis photo archive',
-        description: 'A full-stack digital archival ecosystem designed for community preservation. Engineered the metadata architecture and hardware integration to transform a 300+ photo collection into a searchable, geolocated narrative experience.',
+        shortDesc: 'A heritage preservation system built from nothing',
+        tagline: 'Turning fading memories into a searchable archive',
+        description: 'Métis history was literally fading — photos in shoeboxes, stories lost as generations passed. I was asked to capture these before they disappeared. Given only a budget for an Epson scanner, I built the entire archival ecosystem from scratch: grassroots community organizing to collect photos, legal frameworks for image rights, open-source infrastructure, and a searchable interface. Collecting 300+ photos at scale proved harder than the software.',
+        role: 'Solo build — grassroots organizing, scanning, metadata architecture, database design, frontend development, stakeholder training',
+        challenge: 'No budget, no team, no existing process. Every photo needed to be matched to a family, a story, and a place — then made searchable without losing context.',
+        outcome: 'Community members now find relatives in the archive and reconnect with family history they thought was lost. That excitement from our people is the only metric that matters.',
         tech: ['React', 'Leaflet', 'IndexedDB', 'PWA'],
         year: '2024',
         link: 'https://bayarddevries.github.io/shoebox-v2/',
+        repo: 'https://github.com/Bayarddevries/shoebox-v2',
         color: '#6B8F52'
       },
       {
         id: 'homeland-map',
         title: 'Homeland Map',
         shortDesc: 'Interactive Métis territory visualization',
-        description: 'A high-fidelity spatial data project visualizing Métis territory. Features complex D3.js animations of migration patterns and historical resource overlays, translating archival records into an interactive cartographic interface.',
+        tagline: 'Mapping a homeland that history tried to erase',
+        description: 'Part of my role at the Heritage Centre is developing data for exhibits. When tasked with building an interactive Homeland map, I had no research team and no historical cartography experience. I learned Google Earth Pro to warp and retrace historical trail maps, waterway routes, and settlement data — then built the interactive layers myself. The challenge was that multiple historical maps needed to be considered as a whole, and achieving consensus on accuracy was ongoing.',
+        role: 'Solo research and build — historical map digitization, GeoJSON data compilation, D3.js visualization, cartographic layer design',
+        challenge: 'No precedent data, no specialist support. Had to learn spatial research tools independently and develop a methodology for reconciling conflicting historical sources.',
+        outcome: 'Researchers who reviewed the project validated the approach. Users now explore just how far-reaching Métis influence was — and remains.',
         tech: ['D3.js', 'GeoJSON', 'Leaflet', 'TopoJSON'],
         year: '2024',
         link: 'https://bayarddevries.github.io/metis-homeland-map/',
+        repo: 'https://github.com/Bayarddevries/metis-homeland-map',
         color: '#C49A3A'
-      },
-      {
-        id: 'metis-trail',
-        title: 'Métis Trail RPG',
-        shortDesc: 'Narrative-driven historical game',
-        description: 'A narrative-driven historical simulation built on a custom TypeScript engine. Blends authentic 19th-century economic mechanics (Made Beaver) with branching storylines and handcrafted 32-color pixel art.',
-        tech: ['TypeScript', 'Canvas', 'Pixel Art', 'd20 System'],
-        year: '2024',
-        link: null,
-        color: '#6B1C23'
       },
       {
         id: 'rrmnhc',
         title: 'RRMNHC Site',
-        shortDesc: 'Red River Métis Nation Heritage Centre',
-        description: 'Website for the Red River Métis Nation Heritage Centre. Information about exhibitions, events, and Métis history. Content managed via Contentful CMS, with interactive elements powered by Three.js.',
+        shortDesc: 'AI-augmented rapid prototyping → production heritage site',
+        tagline: 'A testbed that became the product',
+        description: 'Heritage Centre leadership needed a way to visualize concepts — colors, fonts, layouts, interactive elements — before committing to expensive third-party development. I built a working prototype using AI agents as a test of orchestrated agentic web development. The goal was rapid iteration: show leaders something clickable in days, not months. It worked so well that the prototype became the production site — a decision-making tool that\'s now scalable across multiple projects.',
+        role: 'Designer and orchestrator — AI agent workflow design, rapid prototyping, interface design, production deployment',
+        challenge: 'Making something look world-class without a design team or large budget. The rapid feedback loop with leadership meant every iteration had to be polished, not just functional.',
+        outcome: 'The site is now used as a living decision-making tool by Heritage Centre leadership. The AI-augmented prototyping process developed has become a repeatable method applicable across future projects.',
         tech: ['Next.js', 'Contentful', 'Three.js', 'Vercel'],
         year: '2023',
         link: 'https://rrmnhc.ca/',
+        repo: null,
         color: '#8FAE7C'
       }
     ];
@@ -140,18 +145,31 @@
     function openModal(index) {
       var p = projects[index];
       currentProjectIndex = index;
-      
+
       var techHtml = '';
       for (var i = 0; i < p.tech.length; i++) {
         techHtml += '<span class="tag">' + p.tech[i] + '</span>';
       }
-      
+
+      var tagLineHtml = p.tagline ? '<p class="modal-tagline" style="color: var(--color-text-muted); font-size: 0.95rem; font-style: italic; margin-bottom: 1.5rem; border-left: 3px solid ' + p.color + '; padding-left: 1rem;">' + p.tagline + '</p>' : '';
+
+      var roleHtml = p.role ? '<div class="modal-section"><h4 style="color: var(--color-brass); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem;">Role</h4><p style="color: var(--color-text); font-size: 0.95rem;">' + p.role + '</p></div>' : '';
+
+      var challengeHtml = p.challenge ? '<div class="modal-section"><h4 style="color: var(--color-brass); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem;">Challenge</h4><p style="color: var(--color-text); font-size: 0.95rem;">' + p.challenge + '</p></div>' : '';
+
+      var outcomeHtml = p.outcome ? '<div class="modal-section"><h4 style="color: var(--color-brass); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem;">Outcome</h4><p style="color: var(--color-green-bright); font-size: 0.95rem;">' + p.outcome + '</p></div>' : '';
+
+      var repoHtml = p.repo ? '<a href="' + p.repo + '" target="_blank" rel="noopener" class="btn btn-secondary" style="margin-top: 0.5rem; margin-right: 0.5rem;">View Source ↗</a>' : '';
+
       modalContent.innerHTML = '<h2 style="color: ' + p.color + '; margin-bottom: 0.5rem;">' + p.title + '</h2>' +
-        '<p class="modal-year" style="color: var(--color-text-muted); font-size: 0.85rem; margin-bottom: 1.5rem;">' + p.year + '</p>' +
-        '<p class="modal-desc" style="font-size: 1.1rem; line-height: 1.7; margin-bottom: 1.5rem;">' + p.description + '</p>' +
-        '<div class="modal-tech">' + techHtml + '</div>' +
-        (p.link ? '<a href="' + p.link + '" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top: 1.5rem; display: inline-block;">View Project ↗</a>' : '');
-      
+        '<p class="modal-year" style="color: var(--color-text-muted); font-size: 0.85rem; margin-bottom: 0;">' + p.year + '</p>' +
+        tagLineHtml +
+        '<p class="modal-desc" style="font-size: 1rem; line-height: 1.75; margin-bottom: 1.5rem; color: var(--color-text-muted);">' + p.description + '</p>' +
+        '<div style="display: grid; gap: 1.25rem; margin-bottom: 1.5rem;">' + roleHtml + challengeHtml + outcomeHtml + '</div>' +
+        '<div class="modal-tech" style="margin-bottom: 1rem;">' + techHtml + '</div>' +
+        (p.link ? '<a href="' + p.link + '" target="_blank" rel="noopener" class="btn btn-primary">View Project ↗</a>' : '') +
+        repoHtml;
+
       renderDots();
       modal.classList.add('open');
       document.body.style.overflow = 'hidden';
