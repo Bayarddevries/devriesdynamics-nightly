@@ -1335,10 +1335,15 @@ footer {
 }
 
 /* Three.js Demo Containers */
-.three-demo {
-  position: relative;
-/* NOTE: .three-demo styling is defined earlier (lines ~503) and includes consistent sizing, background, border, and canvas handling. This block is intentionally left empty to avoid duplicate definitions. */
+/* Background particle field */
+.bg-particles {
+  position: fixed;
+  inset: 0;
+  width: 100%;
   height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  background: var(--color-bg);
 }
 
 /* Responsive */
