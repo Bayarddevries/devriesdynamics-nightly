@@ -107,7 +107,6 @@
     // FUNCTIONS
     // ============================================
     function renderCards() {
-      console.log("Rendering cards...");
       var html = '';
       for (var i = 0; i < projects.length; i++) {
         var p = projects[i];
@@ -118,6 +117,7 @@
         html += '</article>';
       }
       cardsContainer.innerHTML = html;
+    }
     }
 
     function renderDots() {
@@ -195,14 +195,6 @@
     document.addEventListener('DOMContentLoaded', function() {
       renderCards();
     });
-
-    // Safety fallback: force render after 1 second
-    setTimeout(function() {
-      if (cardsContainer.innerHTML === '') {
-        console.log("Fallback: Cards still empty, forcing render...");
-        renderCards();
-      }
-    }, 1000);
   </script>
 </body>
 </html>
