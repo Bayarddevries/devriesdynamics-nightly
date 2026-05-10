@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design Approaches — Bayard deVries</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .approach-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      padding: 2rem 0;
+    }
+    .approach-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 2rem;
+    }
+    .approach-card h2 {
+      font-size: 1.1rem;
+      color: var(--color-brass);
+      margin-bottom: 0.5rem;
+    }
+    .approach-card .subtitle {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .approach-card h3 {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-text-muted);
+      margin: 1.5rem 0 0.75rem;
+    }
+    .approach-card p, .approach-card li {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: var(--color-text-muted);
+    }
+    .approach-card ul {
+      list-style: none;
+      padding: 0;
+    }
+    .approach-card li::before {
+      content: '→ ';
+      color: var(--color-green);
+    }
+    .approach-card .tagline-display {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      color: var(--color-brass);
+      font-style: italic;
+      border-left: 3px solid var(--color-brass);
+      padding-left: 1rem;
+      margin: 1rem 0;
+      line-height: 1.4;
+    }
+    .mock-hero {
+      background: var(--color-surface-raised);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+    }
+    .mock-hero h4 {
+      font-family: var(--font-heading);
+      color: var(--color-text);
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+    }
+    .mock-hero p {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+    }
+    .mock-card {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 0.5rem 0;
+    }
+    .mock-card h5 {
+      font-size: 0.85rem;
+      color: var(--color-text);
+      margin-bottom: 0.25rem;
+    }
+    .mock-card p {
+      font-size: 0.78rem;
+      line-height: 1.5;
+      color: var(--color-text-muted);
+    }
+    .mock-approach-section {
+      background: var(--color-surface-raised);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+    }
+    .mock-approach-section h4 {
+      font-family: var(--font-heading);
+      color: var(--color-brass);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+    }
+    .mock-approach-section p {
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      line-height: 1.7;
+    }
+    .mock-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--color-border);
+      border-radius: 6px;
+      overflow: hidden;
+      margin: 1rem 0;
+    }
+    .mock-stat {
+      background: var(--color-surface);
+      padding: 0.75rem;
+      text-align: center;
+    }
+    .mock-stat span {
+      display: block;
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      color: var(--color-brass);
+    }
+    .mock-stat small {
+      font-size: 0.6rem;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-brass);
+      border-bottom: 1px solid var(--color-border);
+      padding-bottom: 0.4rem;
+      margin-bottom: 1rem;
+      font-family: var(--font-heading);
+    }
+    .nav-strip {
+      display: flex;
+      gap: 1.5rem;
+      padding: 0.75rem 1rem;
+      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-border);
+      margin-bottom: 2rem;
+      font-size: 0.8rem;
+      font-family: var(--font-heading);
+    }
+    .nav-strip span { color: var(--color-text-muted); }
+    .nav-strip span:first-child { color: var(--color-brass); }
+    .page-title {
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+    .page-title h1 {
+      font-size: 1.5rem;
+      color: var(--color-text);
+    }
+    .page-title p {
+      color: var(--color-text-muted);
+      font-size: 0.9rem;
+    }
+    .prose-sample {
+      background: var(--color-bg);
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 0.5rem 0;
+    }
+    .prose-sample p {
+      font-size: 0.85rem;
+      line-height: 1.8;
+      color: var(--color-text-muted);
+    }
+    .back-link {
+      display: inline-block;
+      margin-bottom: 2rem;
+      color: var(--color-brass);
+      font-size: 0.85rem;
+      font-family: var(--font-heading);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="approach.html" class="active">Approach</a>
+      <a href="resume.html">Resume</a>
+    </nav>
+  </header>
+
+  <main style="max-width: 1100px; margin: 0 auto; padding: 2rem 1rem;">
+    <a href="index.html" class="back-link">← Back to site</a>
+
+    <div class="page-title">
+      <h1>Three Approaches to the "From Nothing" Theme</h1>
+      <p>Pick one and I'll implement it, or mix elements from different approaches.</p>
+    </div>
+
+    <div class="approach-grid">
+
+      <!-- APPROACH A -->
+      <div class="approach-card">
+        <h2>A — Subtle</h2>
+        <p class="subtitle">Strengthen what exists, don't add new sections</p>
+
+        <div class="section-label">What changes</div>
+
+        <h3>Homepage hero</h3>
+        <div class="mock-hero">
+          <h4>Bayard deVries</h4>
+          <p>Turning ambiguity into architecture</p>
+          <p class="location" style="font-size: 0.75rem; color: var(--color-brass);">Winnipeg, Manitoba</p>
+          <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-top: 0.5rem;">Whether leading a team or building solo, I specialize in shipping outcomes where others see constraints. With 15+ years of experience, I bridge strategy and technical execution.</p>
+        </div>
+
+        <h3>Project cards — new descriptions</h3>
+        <div class="mock-card">
+          <h5>Shoebox V2</h5>
+          <p>Given a scanner and a community's fading memories, I built an archive that keeps stories alive. 300+ photos, matched to families and places, searchable without losing context.</p>
+        </div>
+        <div class="mock-card">
+          <h5>Homeland Map</h5>
+          <p>No research team, no cartography background — just historical maps and a problem to solve. I learned the tools myself and mapped a homeland that history almost erased.</p>
+        </div>
+        <div class="mock-card">
+          <h5>RRMNHC Site</h5>
+          <p>Started as a rapid prototyping test with AI agents. Became the production site. Leadership uses it as a living decision-making tool across every project.</p>
+        </div>
+
+        <h3>What stays the same</h3>
+        <ul>
+          <li>No new page sections</li>
+          <li>No theme statement — it's woven into descriptions</li>
+          <li>Minimal visual change</li>
+        </ul>
+
+        <h3>Pros</h3>
+        <ul>
+          <li>Fast to implement</li>
+          <li>No added page weight or complexity</li>
+          <li>Feels natural, not forced</li>
+        </ul>
+
+        <h3>Cons</h3>
+        <ul>
+          <li>Only visible if someone reads every card</li>
+          <li>Easy to miss</li>
+        </ul>
+      </div>
+
+      <!-- APPROACH B -->
+      <div class="approach-card">
+        <h2>B — Prominent</h2>
+        <p class="subtitle">Add a philosophy section under the hero</p>
+
+        <div class="section-label">What changes</div>
+
+        <h3>New section under hero — "How I Work"</h3>
+        <div class="mock-approach-section">
+          <h4>I start with nothing. I make something that matters.</h4>
+          <p>Every project here began the same way: no budget, no team, no precedent. Just a problem worth solving and the willingness to figure out the rest as I went. I don't wait for ideal conditions — I create within real ones.</p>
+        </div>
+
+        <h3>Project cards — same strengthened descriptions</h3>
+        <div class="mock-card">
+          <h5>Shoebox V2</h5>
+          <p>Given a scanner and a community's fading memories, I built an archive that keeps stories alive.</p>
+        </div>
+        <div class="mock-card">
+          <h5>Homeland Map</h5>
+          <p>No research team, no cartography background. I learned the tools myself and mapped a homeland that history almost erased.</p>
+        </div>
+
+        <h3>What else changes</h3>
+        <ul>
+          <li>New section appears under hero on homepage and about page</li>
+          <li>Short and declarative — 2-3 sentences max</li>
+          <li>Connects directly to the project outcomes below</li>
+        </ul>
+
+        <h3>Pros</h3>
+        <ul>
+          <li>Immediately sets expectations</li>
+          <li>Memorable — recruiter reads this in 5 seconds</li>
+          <li>Creates a throughline before they even see your work</li>
+        </ul>
+
+        <h3>Cons</h3>
+        <ul>
+          <li>Adds visual weight — needs to be styled well</li>
+          <li>Only visible on homepage/about</li>
+        </ul>
+      </div>
+
+      <!-- APPROACH C -->
+      <div class="approach-card">
+        <h2>C — Dedicated Page</h2>
+        <p class="subtitle">Own it fully — a full "Approach" page with case study structure</p>
+
+        <div class="section-label">What changes</div>
+
+        <h3>New route: /approach.html</h3>
+        <div class="mock-approach-section">
+          <h4>I start with nothing. I make something that matters.</h4>
+          <p>Every project here began with a blank page, no budget, and a problem someone needed solved. I build the plane while flying it — and I've gotten very good at it.</p>
+        </div>
+
+        <h3>Three project narratives — full PSR format</h3>
+        <div class="mock-card" style="border-left: 3px solid #6B8F52;">
+          <h5 style="color: #6B8F52;">Shoebox V2</h5>
+          <p class="tagline-display" style="font-size: 1rem; margin: 0.5rem 0 0.75rem;">Turning fading memories into a searchable archive</p>
+          <p><strong>Problem:</strong> Métis history was literally fading in shoeboxes. Stories lost as generations passed.</p>
+          <p><strong>Role:</strong> Solo build — grassroots organizing, scanning, metadata, frontend, training.</p>
+          <p><strong>Challenge:</strong> No budget, no team, no process. Every photo needed a family, a story, and a place.</p>
+          <p><strong>Outcome:</strong> Community members now find relatives and reconnect with history they thought was lost.</p>
+        </div>
+        <div class="mock-card" style="border-left: 3px solid #C49A3A;">
+          <h5 style="color: #C49A3A;">Homeland Map</h5>
+          <p class="tagline-display" style="font-size: 1rem; margin: 0.5rem 0 0.75rem;">Mapping a homeland that history tried to erase</p>
+          <p><strong>Problem:</strong> No interactive way to show how far-reaching Métis influence was.</p>
+          <p><strong>Role:</strong> Solo research and build — learned Google Earth Pro, compiled GeoJSON, built the viz.</p>
+          <p><strong>Challenge:</strong> Multiple historical maps needing consensus. No spatial research background.</p>
+          <p><strong>Outcome:</strong> Researchers validated the approach. Users explore a history that was almost lost.</p>
+        </div>
+        <div class="mock-card" style="border-left: 3px solid #8FAE7C;">
+          <h5 style="color: #8FAE7C;">RRMNHC Site</h5>
+          <p class="tagline-display" style="font-size: 1rem; margin: 0.5rem 0 0.75rem;">A testbed that became the product</p>
+          <p><strong>Problem:</strong> Leadership needed to see concepts before committing to expensive dev.</p>
+          <p><strong>Role:</strong> Designer + AI agent orchestrator. Rapid prototyping at production quality.</p>
+          <p><strong>Challenge:</strong> Looking world-class without a design team. Every iteration had to be polished.</p>
+          <p><strong>Outcome:</strong> Prototype became the production site. Method is now repeatable across projects.</p>
+        </div>
+
+        <h3>Pros</h3>
+        <ul>
+          <li>Full PSR (Problem → Role → Challenge → Outcome) structure</li>
+          <li>Distinct from generic portfolio — feels like a real case study document</li>
+          <li>Impressive to anyone scrolling a hiring manager's stack</li>
+        </ul>
+
+        <h3>Cons</h3>
+        <ul>
+          <li>More implementation work</li>
+          <li>New nav item to manage</li>
+          <li>Could feel heavy if overdone</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin-top: 2rem; padding: 1.5rem; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px;">
+      <p style="font-size: 0.9rem; color: var(--color-text-muted); text-align: center;">
+        <strong style="color: var(--color-text);">My recommendation:</strong> Start with <strong style="color: var(--color-brass);">Approach C</strong> as a dedicated page — it's the strongest signal for a senior ops/leadership role. Add Approach A's card descriptions as a complement.<br>
+        But ultimately this is your story. Which elements do you want to keep from each?
+      </p>
+    </div>
+  </main>
+</body>
+</html>
