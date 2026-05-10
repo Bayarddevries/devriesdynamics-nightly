@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <canvas id="bgParticles" class="bg-particles"></canvas>
   <header>
     <nav>
       <a href="index.html">Home</a>
@@ -27,52 +26,6 @@
       <!-- Cards rendered from JS -->
     </section>
   </main>
-
-  <script type="module">
-    import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.166.1/build/three.module.js';
-
-    const canvas = document.getElementById('bgParticles');
-    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 100);
-    camera.position.z = 5;
-
-    const count = 2000;
-    const palette = [0xA67C29, 0x2C4A1E, 0x6B8F52, 0xC49A3A, 0x8FAE7C];
-    const positions = new Float32Array(count * 3);
-    const colors    = new Float32Array(count * 3);
-    for (let i = 0; i < count; i++) {
-      positions[i * 3]     = (Math.random() - 0.5) * 10;
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 10;
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 6;
-      const c = new THREE.Color(palette[Math.floor(Math.random() * palette.length)]);
-      colors[i * 3]     = c.r;
-      colors[i * 3 + 1] = c.g;
-      colors[i * 3 + 2] = c.b;
-    }
-    const geo = new THREE.BufferGeometry();
-    geo.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
-    geo.setAttribute('color',    new THREE.Float32BufferAttribute(colors, 3));
-    const mat = new THREE.PointsMaterial({ vertexColors: true, size: 0.05, transparent: true, opacity: 0.7 });
-    scene.add(new THREE.Points(geo, mat));
-
-    function animate() {
-      requestAnimationFrame(animate);
-      scene.rotation.y += 0.00025;
-      renderer.render(scene, camera);
-    }
-    animate();
-
-    function resize() {
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-    }
-    window.addEventListener('resize', resize);
-    resize();
-  </script>
 
   <div class="project-modal" id="projectModal">
     <button class="modal-close" id="modalClose">&times;</button>
