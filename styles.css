@@ -1494,7 +1494,11 @@ footer {
   .stats-bar { grid-template-columns: 1fr 1fr; }
   .stats-bar .stat-item:nth-child(3) { grid-column: 1 / -1; max-width: 50%; }
   .stat-number { font-size: 1.4rem; }
-  nav { gap: 1.25rem; }
+  header { padding: 0.5rem 0.75rem; }
+  nav { gap: 0.75rem; flex-wrap: wrap; }
+  .nav-logo { font-size: 0.8rem; }
+  .nav-logo span { display: none; }
+  nav a { font-size: 0.75rem; }
   .competencies-grid { grid-template-columns: 1fr 1fr; }
   .glass-demo, .hover-cards { grid-template-columns: 1fr; }
   .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
