@@ -48,8 +48,8 @@
 
   --font-heading: 'Space Grotesk', sans-serif;
   --font-body: 'DM Sans', sans-serif;
-  --max-width: 900px;
-  --max-width-content: 720px;
+  --max-width: 1100px;
+  --max-width-content: 800px;
 }
 
 /* Import fonts */
@@ -135,7 +135,7 @@ main {
 /* Hero */
 .hero {
   text-align: left;
-  padding: 4rem 0 3rem;
+  padding: 5rem 0 3.5rem;
   position: relative;
 }
 
@@ -151,7 +151,7 @@ main {
 
 .hero h1 {
   font-family: var(--font-heading);
-  font-size: 2.75rem;
+  font-size: 3.25rem;
   font-weight: 300;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -187,17 +187,10 @@ main {
   color: var(--color-text-muted);
   font-size: 0.95rem;
   line-height: 1.75;
-  max-width: 520px;
+  max-width: 600px;
   margin: 0 0 2.5rem;
   font-weight: 300;
   text-align: left;
-}
-
-.cta-group {
-  display: flex;
-  gap: 0.75rem;
-  justify-content: flex-start;
-  flex-wrap: wrap;
 }
 
 .btn {
@@ -240,28 +233,22 @@ main {
   transform: translateY(-1px);
 }
 
-/* Stats bar — asymmetric 2+1 layout, not equal thirds */
+/* Stats bar — clean 3-column layout */
 .stats-bar {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto auto;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 1px;
   background: var(--color-border);
   border: 1px solid var(--color-border);
   border-radius: 6px;
   margin: 3rem 0;
-  max-width: 520px;
   overflow: hidden;
 }
 
 .stats-bar .stat-item:nth-child(1),
-.stats-bar .stat-item:nth-child(2) {
-  grid-column: span 1;
-}
-
+.stats-bar .stat-item:nth-child(2),
 .stats-bar .stat-item:nth-child(3) {
-  grid-column: 1 / -1;
-  max-width: 50%;
+  grid-column: span 1;
 }
 
 .stat-item {
@@ -316,7 +303,7 @@ main {
 
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1.5rem;
 }
 
@@ -646,7 +633,7 @@ body::before {
   border: 1px solid var(--color-border);
   border-radius: 16px;
   padding: 2.5rem;
-  max-width: 540px;
+  max-width: 700px;
   width: 90%;
   max-height: 80vh;
   overflow-y: auto;
@@ -809,8 +796,8 @@ body::before {
 
 .about-grid {
   display: grid;
-  grid-template-columns: 3fr 2fr;
-  gap: 4rem;
+  grid-template-columns: 2fr 1fr;
+  gap: 5rem;
   align-items: start;
 }
 
