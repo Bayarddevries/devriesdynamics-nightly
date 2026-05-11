@@ -6,6 +6,26 @@
   <title>Projects — Bayard deVries</title>
   <link rel="stylesheet" href="styles.css">
   <style>
+    /* Personal project badge */
+    .project-badge-personal {
+      display: inline-block;
+      font-size: 0.6rem;
+      font-family: var(--font-heading);
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-brass);
+      background: var(--color-brass-glow);
+      border: 1px solid var(--color-brass-dim);
+      border-radius: 3px;
+      padding: 0.1rem 0.4rem;
+      vertical-align: middle;
+      margin-left: 0.4rem;
+    }
+    .project-card-interactive .project-badge-personal {
+      font-size: 0.55rem;
+    }
+
     /* Gallery thumbnails inside modal */
     .modal-gallery {
       display: grid;
@@ -180,6 +200,39 @@
           { src: 'assets/rrmnhc-menu.png', alt: 'RRMNHC website menu/navigation' },
           { src: 'assets/rrmnhc-news.png', alt: 'RRMNHC website news section' }
         ]
+      {
+        id: 'west-and-back',
+        title: 'West and Back',
+        shortDesc: 'A narrative-driven historical RPG',
+        tagline: 'A Métis survival journey across the prairies',
+        description: 'A narrative-driven historical simulation built on a custom TypeScript engine. Blends authentic 19th-century economic mechanics (Made Beaver currency) with branching storylines and handcrafted 32-color pixel art. Inspired by the Oregon Trail but rooted in real Métis history — the fur trade, the Red River Settlement, and the push west. Currently in active development with four playable scenarios.',
+        role: 'Solo project — game design, pixel art, TypeScript engine development, historical research',
+        challenge: 'Balancing historical accuracy with engaging gameplay. Every scenario needs to teach something real about Métis experience while remaining fun and replayable.',
+        outcome: 'Four scenarios in development: Failed Hunt, Trading Run, Letter Run, and Pilgrimage. The custom d20 + push-your-luck system creates tense, meaningful decisions.',
+        tech: ['TypeScript', 'Canvas', 'Pixel Art', 'Aseprite'],
+        year: '2025',
+        link: null,
+        repo: null,
+        color: '#C49A3A',
+        screenshots: [],
+        personal: true
+      },
+      {
+        id: 'wilting-flower',
+        title: 'Wilting Flower',
+        shortDesc: 'Interactive kinetic sculpture',
+        tagline: 'A flower that blooms when you approach',
+        description: 'An interactive kinetic sculpture that responds to human presence. A Laser ToF (Time of Flight) sensor detects when someone approaches, triggering an Arduino Nano to actuate an MG996R servo that makes a flower "bloom" and "breathe" — petals opening and closing with an LED glow. The piece explores the relationship between technology and organic form: cold electronics creating something that feels alive.',
+        role: 'Solo build — circuit design, Arduino programming, servo control, sensor integration, physical fabrication',
+        challenge: 'Making mechanical movement feel organic rather than robotic. The servo control needed careful easing curves to mimic natural motion rather than mechanical snapping.',
+        outcome: 'A working prototype that reliably detects approach, blooms the flower, holds while the viewer is present, and slowly closes when they leave. The effect is surprisingly emotional.',
+        tech: ['Arduino Nano', 'Laser ToF Sensor', 'MG996R Servo', 'LED', 'C++'],
+        year: '2025',
+        link: null,
+        repo: null,
+        color: '#8FAE7C',
+        screenshots: [],
+        personal: true
       }
     ];
 
@@ -204,11 +257,12 @@
       var html = '';
       for (var i = 0; i < projects.length; i++) {
         var p = projects[i];
+        var badge = p.personal ? ' <span class="project-badge-personal">Personal</span>' : '';
         html += '<article class="project-card-interactive" data-index="' + i + '" style="--accent: ' + p.color + '" onclick="openModal(' + i + ')">';
         if (p.screenshots && p.screenshots.length > 0) {
           html += '<div class="card-thumb"><img src="' + p.screenshots[0].src + '" alt="' + p.screenshots[0].alt + '" loading="lazy"></div>';
         }
-        html += '<h3>' + p.title + '</h3>';
+        html += '<h3>' + p.title + badge + '</h3>';
         html += '<p>' + p.shortDesc + '</p>';
         html += '<span class="card-year">' + p.year + '</span>';
         html += '</article>';

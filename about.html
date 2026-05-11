@@ -5,6 +5,123 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About — Bayard deVries</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    /* ---- Photo ---- */
+    .about-photo-wrap {
+      margin-bottom: 2rem;
+    }
+    .about-photo {
+      width: 100%;
+      max-width: 220px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--color-border);
+      display: block;
+    }
+
+    /* ---- Personal details ---- */
+    .personal-details {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    .personal-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.3rem 0.7rem;
+      background: var(--color-surface-raised);
+      border: 1px solid var(--color-border);
+      border-radius: 3px;
+      font-size: 0.78rem;
+      color: var(--color-text-muted);
+      font-family: var(--font-heading);
+      letter-spacing: 0.02em;
+    }
+    .personal-tag .icon {
+      font-size: 0.9rem;
+    }
+
+    /* ---- CTV Interview embed ---- */
+    .interview-section {
+      margin-top: 2.5rem;
+    }
+    .interview-embed {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 8px;
+      border: 1px solid var(--color-border);
+      background: var(--color-surface);
+    }
+    .interview-embed iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .interview-caption {
+      margin-top: 0.5rem;
+      font-size: 0.78rem;
+      color: var(--color-text-muted);
+      font-style: italic;
+    }
+
+    /* ---- Now section ---- */
+    .now-section {
+      margin-top: 2.5rem;
+    }
+    .now-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .now-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .now-list li:first-child {
+      border-top: 1px solid var(--color-border);
+    }
+    .now-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--color-green-bright);
+      flex-shrink: 0;
+      margin-top: 0.5rem;
+      box-shadow: 0 0 6px rgba(143, 184, 114, 0.4);
+    }
+    .now-dot.pulse {
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; box-shadow: 0 0 6px rgba(143,184,114,0.4); }
+      50% { opacity: 0.5; box-shadow: 0 0 12px rgba(143,184,114,0.7); }
+    }
+    .now-item-text {
+      font-size: 0.88rem;
+      color: var(--color-text);
+      line-height: 1.5;
+    }
+    .now-item-text strong {
+      color: var(--color-brass);
+      font-weight: 500;
+    }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 700px) {
+      .about-photo { max-width: 160px; }
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -17,10 +134,16 @@
   </header>
 
   <main class="about-page">
-    <!-- Left: bio | Right: what I actually do -->
     <div class="about-grid">
 
+      <!-- LEFT COLUMN: Photo + Bio + CTV + Now -->
       <div class="about-left">
+
+        <!-- Photo -->
+        <div class="about-photo-wrap">
+          <img class="about-photo" src="assets/photo-front.jpg" alt="Bayard deVries">
+        </div>
+
         <div class="section-rule">
           <span class="section-rule-label">Background</span>
         </div>
@@ -36,8 +159,69 @@
         <p class="summary-text" style="text-align:left; max-width:none;">
           The thread through everything: finding the thing that needs to exist, then figuring out how to make it real with the resources available.
         </p>
+
+        <!-- Personal details -->
+        <div class="section-rule" style="margin-top: 2.5rem;">
+          <span class="section-rule-label">Personal</span>
+        </div>
+        <p class="summary-text" style="text-align:left; max-width:none;">
+          When I'm not working, I'm usually elbow-deep in some side project or another.
+        </p>
+        <div class="personal-details">
+          <span class="personal-tag"><span class="icon">⚡</span> Electronics projects</span>
+          <span class="personal-tag"><span class="icon">🎮</span> Video games</span>
+          <span class="personal-tag"><span class="icon">📖</span> Sci-fi reading</span>
+          <span class="personal-tag"><span class="icon">📷</span> Photography</span>
+        </div>
+
+        <!-- CTV Interview embed -->
+        <div class="interview-section">
+          <div class="section-rule">
+            <span class="section-rule-label">In the media</span>
+          </div>
+          <div class="interview-embed">
+            <iframe
+              src="https://www.youtube.com/embed/lR3AAZW8OjQ"
+              title="CTV News interview with Bayard deVries about Métis art"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+              loading="lazy">
+            </iframe>
+          </div>
+          <p class="interview-caption">
+            CTV News Winnipeg — Métis artist discusses heritage and craft
+            &middot; <a href="https://www.youtube.com/watch?v=lR3AAZW8OjQ" target="_blank" rel="noopener" style="color:var(--color-brass);">Watch on YouTube ↗</a>
+          </p>
+        </div>
+
+        <!-- Now section -->
+        <div class="now-section">
+          <div class="section-rule">
+            <span class="section-rule-label">Now</span>
+          </div>
+          <ul class="now-list">
+            <li>
+              <span class="now-dot pulse"></span>
+              <span class="now-item-text"><strong>Shoebox V2</strong> — expanding the archive, adding new collections and search features</span>
+            </li>
+            <li>
+              <span class="now-dot pulse"></span>
+              <span class="now-item-text"><strong>Homeland Map</strong> — refining historical layers and adding migration pattern animations</span>
+            </li>
+            <li>
+              <span class="now-dot pulse"></span>
+              <span class="now-item-text"><strong>West and Back</strong> — developing new scenarios and polishing the pixel art pipeline</span>
+            </li>
+            <li>
+              <span class="now-dot pulse"></span>
+              <span class="now-item-text"><strong>Wilting Flower</strong> — building an interactive kinetic sculpture that blooms when you approach</span>
+            </li>
+          </ul>
+        </div>
+
       </div>
 
+      <!-- RIGHT COLUMN: What I do + Contact -->
       <div class="about-right">
         <div class="section-rule">
           <span class="section-rule-label">What I do</span>
