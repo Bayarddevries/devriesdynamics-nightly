@@ -5,6 +5,76 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Projects — Bayard deVries</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Gallery thumbnails inside modal */
+    .modal-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .modal-gallery img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      object-position: top left;
+      border-radius: 6px;
+      border: 1px solid var(--color-border);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+      cursor: pointer;
+    }
+    .modal-gallery img:hover {
+      transform: scale(1.02);
+      border-color: var(--color-brass);
+    }
+    /* Card thumbnail */
+    .card-thumb {
+      margin: -1.5rem -1.5rem 1rem -1.5rem;
+      overflow: hidden;
+      border-radius: 12px 12px 0 0;
+      height: 160px;
+      background: var(--color-bg);
+    }
+    .card-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top left;
+      transition: transform 0.3s ease;
+    }
+    .project-card-interactive:hover .card-thumb img {
+      transform: scale(1.04);
+    }
+    /* Lightbox overlay */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0,0,0,0.9);
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .lightbox.open {
+      display: flex;
+    }
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 4px;
+    }
+    /* Gallery section label */
+    .gallery-label {
+      font-family: var(--font-heading);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: 0.5rem;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -38,6 +108,11 @@
     </div>
   </div>
 
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <img id="lightboxImg" src="" alt="">
+  </div>
+
   <footer>
     <p class="site-by">Bayard deVries · <a href="index.html" style="color: var(--color-brass);">Home</a></p>
   </footer>
@@ -60,7 +135,11 @@
         year: '2024',
         link: 'https://bayarddevries.github.io/shoebox-v2/',
         repo: 'https://github.com/Bayarddevries/shoebox-v2',
-        color: '#6B8F52'
+        color: '#6B8F52',
+        screenshots: [
+          { src: 'assets/shoebox-v2-splash.png', alt: 'Shoebox V2 splash/interface screen' },
+          { src: 'assets/shoebox-grid.png', alt: 'Shoebox V2 photo grid view' }
+        ]
       },
       {
         id: 'homeland-map',
@@ -75,7 +154,12 @@
         year: '2024',
         link: 'https://bayarddevries.github.io/metis-homeland-map/',
         repo: 'https://github.com/Bayarddevries/metis-homeland-map',
-        color: '#C49A3A'
+        color: '#C49A3A',
+        screenshots: [
+          { src: 'assets/homeland-map-main.png', alt: 'Homeland Map main interactive view' },
+          { src: 'assets/homeland-map-polygon.png', alt: 'Homeland Map territory polygon overlay' },
+          { src: 'assets/homeland-map-splash.png', alt: 'Homeland Map splash/loading screen' }
+        ]
       },
       {
         id: 'rrmnhc',
@@ -90,7 +174,12 @@
         year: '2023',
         link: 'https://rrmnhc.ca/',
         repo: null,
-        color: '#8FAE7C'
+        color: '#8FAE7C',
+        screenshots: [
+          { src: 'assets/rrmnhc-splash.png', alt: 'RRMNHC website splash page' },
+          { src: 'assets/rrmnhc-menu.png', alt: 'RRMNHC website menu/navigation' },
+          { src: 'assets/rrmnhc-news.png', alt: 'RRMNHC website news section' }
+        ]
       }
     ];
 
@@ -105,6 +194,8 @@
     var modalNext = document.getElementById('modalNext');
     var modalDots = document.getElementById('modalDots');
     var currentProjectIndex = 0;
+    var lightbox = document.getElementById('lightbox');
+    var lightboxImg = document.getElementById('lightboxImg');
 
     // ============================================
     // FUNCTIONS
@@ -114,6 +205,9 @@
       for (var i = 0; i < projects.length; i++) {
         var p = projects[i];
         html += '<article class="project-card-interactive" data-index="' + i + '" style="--accent: ' + p.color + '" onclick="openModal(' + i + ')">';
+        if (p.screenshots && p.screenshots.length > 0) {
+          html += '<div class="card-thumb"><img src="' + p.screenshots[0].src + '" alt="' + p.screenshots[0].alt + '" loading="lazy"></div>';
+        }
         html += '<h3>' + p.title + '</h3>';
         html += '<p>' + p.shortDesc + '</p>';
         html += '<span class="card-year">' + p.year + '</span>';
@@ -140,6 +234,17 @@
       }
     }
 
+    function renderGallery(screenshots) {
+      if (!screenshots || screenshots.length === 0) return '';
+      var html = '<div class="gallery-label">Screenshots</div>';
+      html += '<div class="modal-gallery">';
+      for (var i = 0; i < screenshots.length; i++) {
+        html += '<img src="' + screenshots[i].src + '" alt="' + screenshots[i].alt + '" onclick="event.stopPropagation(); showLightbox(\'' + screenshots[i].src + '\')">';
+      }
+      html += '</div>';
+      return html;
+    }
+
     function openModal(index) {
       var p = projects[index];
       currentProjectIndex = index;
@@ -150,18 +255,16 @@
       }
 
       var tagLineHtml = p.tagline ? '<p class="modal-tagline" style="color: var(--color-text-muted); font-size: 0.95rem; font-style: italic; margin-bottom: 1.5rem; border-left: 3px solid ' + p.color + '; padding-left: 1rem;">' + p.tagline + '</p>' : '';
-
       var roleHtml = p.role ? '<div class="modal-section"><h4 style="color: var(--color-brass); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem;">Role</h4><p style="color: var(--color-text); font-size: 0.95rem;">' + p.role + '</p></div>' : '';
-
       var challengeHtml = p.challenge ? '<div class="modal-section"><h4 style="color: var(--color-brass); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem;">Challenge</h4><p style="color: var(--color-text); font-size: 0.95rem;">' + p.challenge + '</p></div>' : '';
-
       var outcomeHtml = p.outcome ? '<div class="modal-section"><h4 style="color: var(--color-brass); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem;">Outcome</h4><p style="color: var(--color-green-bright); font-size: 0.95rem;">' + p.outcome + '</p></div>' : '';
-
       var repoHtml = p.repo ? '<a href="' + p.repo + '" target="_blank" rel="noopener" class="btn btn-secondary" style="margin-top: 0.5rem; margin-right: 0.5rem;">View Source ↗</a>' : '';
+      var galleryHtml = renderGallery(p.screenshots);
 
       modalContent.innerHTML = '<h2 style="color: ' + p.color + '; margin-bottom: 0.5rem;">' + p.title + '</h2>' +
         '<p class="modal-year" style="color: var(--color-text-muted); font-size: 0.85rem; margin-bottom: 0;">' + p.year + '</p>' +
         tagLineHtml +
+        galleryHtml +
         '<p class="modal-desc" style="font-size: 1rem; line-height: 1.75; margin-bottom: 1.5rem; color: var(--color-text-muted);">' + p.description + '</p>' +
         '<div style="display: grid; gap: 1.25rem; margin-bottom: 1.5rem;">' + roleHtml + challengeHtml + outcomeHtml + '</div>' +
         '<div class="modal-tech" style="margin-bottom: 1rem;">' + techHtml + '</div>' +
@@ -178,6 +281,16 @@
       document.body.style.overflow = '';
     }
 
+    function showLightbox(src) {
+      lightboxImg.src = src;
+      lightbox.classList.add('open');
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      lightboxImg.src = '';
+    }
+
     // ============================================
     // EVENT LISTENERS
     // ============================================
@@ -185,6 +298,8 @@
     modal.addEventListener('click', function(e) {
       if (e.target === modal) closeModal();
     });
+
+    lightbox.addEventListener('click', closeLightbox);
 
     modalPrev.addEventListener('click', function() {
       currentProjectIndex = (currentProjectIndex - 1 + projects.length) % projects.length;
@@ -197,11 +312,14 @@
     });
 
     document.addEventListener('keydown', function(e) {
+      if (lightbox.classList.contains('open')) {
+        if (e.key === 'Escape') closeLightbox();
+        return;
+      }
       if (!modal.classList.contains('open')) return;
       if (e.key === 'Escape') closeModal();
-      if (e.key === 'ArrowLeft') currentProjectIndex = (currentProjectIndex - 1 + projects.length) % projects.length;
-      if (e.key === 'ArrowRight') currentProjectIndex = (currentProjectIndex + 1) % projects.length;
-      openModal(currentProjectIndex);
+      if (e.key === 'ArrowLeft') { currentProjectIndex = (currentProjectIndex - 1 + projects.length) % projects.length; openModal(currentProjectIndex); }
+      if (e.key === 'ArrowRight') { currentProjectIndex = (currentProjectIndex + 1) % projects.length; openModal(currentProjectIndex); }
     });
 
     // ============================================
