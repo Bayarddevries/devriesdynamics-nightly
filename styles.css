@@ -90,16 +90,42 @@ a:hover {
 
 /* Header */
 header {
-  background: var(--color-surface);
-  border-bottom: 1px solid var(--color-border);
-  padding: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(28, 36, 22, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(46, 58, 37, 0.6);
+  padding: 0.75rem 1rem;
 }
 
 nav {
   max-width: var(--max-width);
   margin: 0 auto;
   display: flex;
+  align-items: center;
   gap: 2rem;
+}
+
+.nav-logo {
+  color: var(--color-brass);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  margin-right: auto;
+  white-space: nowrap;
+  font-family: var(--font-heading);
+}
+
+.nav-logo span {
+  color: var(--color-text-muted);
+  font-weight: 400;
+  font-size: 0.6rem;
+  display: block;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 nav a {
@@ -109,18 +135,37 @@ nav a {
   font-family: var(--font-heading);
   font-weight: 400;
   padding: 0.25rem 0;
-  border-bottom: 2px solid transparent;
-  transition: color 0.15s ease, border-color 0.15s ease;
+  position: relative;
+  transition: color 0.2s ease;
   letter-spacing: 0.02em;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-brass);
+  transition: width 0.25s ease;
 }
 
 nav a:hover {
   color: var(--color-text);
 }
 
+nav a:hover::after {
+  width: 100%;
+}
+
 nav a.active {
   color: var(--color-brass);
-  border-bottom-color: var(--color-brass);
+  text-shadow: 0 0 12px rgba(196, 154, 58, 0.3);
+}
+
+nav a.active::after {
+  width: 100%;
 }
 
 /* Main */
@@ -276,17 +321,6 @@ main {
 }
 
 /* Sections */
-.section-header {
-  font-size: 0.7rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--color-brass);
-  border-bottom: 1px solid var(--color-border);
-  padding-bottom: 0.4rem;
-  margin-bottom: 1.5rem;
-  font-family: var(--font-heading);
-  font-weight: 400;
-}
 
 /* Featured / Project Grid */
 .featured {
@@ -539,57 +573,6 @@ body::before {
      pointer-events: none;
    }
    
-/* Skills / Tools strip */
-.skills-strip {
-  margin-top: 3rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--color-border);
-}
-
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1.5rem;
-}
-
-.skill-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.skill-group-label {
-  font-family: var(--font-heading);
-  font-size: 0.65rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-text-muted);
-}
-
-.skill-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem;
-}
-
-.skill-tag {
-  display: inline-block;
-  padding: 0.25rem 0.6rem;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 3px;
-  font-size: 0.75rem;
-  color: var(--color-text-muted);
-  font-family: var(--font-heading);
-  letter-spacing: 0.02em;
-  transition: border-color 0.15s ease, color 0.15s ease;
-}
-
-.skill-tag:hover {
-  border-color: var(--color-brass);
-  color: var(--color-text);
-}
-
 /* Ensure later demos stack nicely */
    .demo-section { margin-bottom: 3rem; }
 
