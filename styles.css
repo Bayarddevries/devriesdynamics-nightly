@@ -763,6 +763,15 @@ body::before {
   letter-spacing: 0.04em;
 }
 
+.tag.personal {
+  background: #C49A3A;
+  color: #1a1a2e;
+  font-weight: 700;
+  text-transform: uppercase;
+  vertical-align: middle;
+  margin-left: 0.4rem;
+}
+
 /* Resume/About specific */
 .resume-page {
   max-width: var(--max-width-content);
