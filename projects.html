@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Projects — Bayard deVries</title>
+  <meta name="description" content="Projects by Bayard deVries – digital archives, GIS mapping, interactive art, and game development.">
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="styles.css">
   <style>
     /* Personal project badge */
@@ -136,7 +138,12 @@
   </div>
 
   <footer>
-    <p class="site-by">Bayard deVries · <a href="index.html" style="color: var(--color-brass);">Home</a></p>
+    <p>
+      <a href="mailto:Bayarddevries@Gmail.com">Bayarddevries@Gmail.com</a> ·
+      <a href="tel:204-510-3865">204-510-3865</a> ·
+      <a href="https://linkedin.com/in/bayard-devries" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    </p>
+    <p>&copy; 2026 Bayard deVries</p>
   </footer>
 
   <script>
@@ -317,7 +324,7 @@
       var roleHtml = p.role ? '<div class="modal-section"><h4 style="color: var(--color-brass); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem;">Role</h4><p style="color: var(--color-text); font-size: 0.95rem;">' + p.role + '</p></div>' : '';
       var challengeHtml = p.challenge ? '<div class="modal-section"><h4 style="color: var(--color-brass); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem;">Challenge</h4><p style="color: var(--color-text); font-size: 0.95rem;">' + p.challenge + '</p></div>' : '';
       var outcomeHtml = p.outcome ? '<div class="modal-section"><h4 style="color: var(--color-brass); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem;">Outcome</h4><p style="color: var(--color-green-bright); font-size: 0.95rem;">' + p.outcome + '</p></div>' : '';
-      var repoHtml = p.repo ? '<a href="' + p.repo + '" target="_blank" rel="noopener" class="btn btn-secondary" style="margin-top: 0.5rem; margin-right: 0.5rem;">View Source ↗</a>' : '';
+      var repoHtml = p.repo ? '<a href="' + p.repo + '" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="margin-top: 0.5rem; margin-right: 0.5rem;">View Source ↗</a>' : '';
       var galleryHtml = renderGallery(p.screenshots);
 
       modalContent.innerHTML = '<h2 style="color: ' + p.color + '; margin-bottom: 0.5rem;">' + p.title + '</h2>' +
@@ -327,7 +334,7 @@
         '<p class="modal-desc" style="font-size: 1rem; line-height: 1.75; margin-bottom: 1.5rem; color: var(--color-text-muted);">' + p.description + '</p>' +
         '<div style="display: grid; gap: 1.25rem; margin-bottom: 1.5rem;">' + roleHtml + challengeHtml + outcomeHtml + '</div>' +
         '<div class="modal-tech" style="margin-bottom: 1rem;">' + techHtml + '</div>' +
-        (p.link ? '<a href="' + p.link + '" target="_blank" rel="noopener" class="btn btn-primary">View Project ↗</a>' : '') +
+        (p.link ? '<a href="' + p.link + '" target="_blank" rel="noopener noreferrer" class="btn btn-primary">View Project ↗</a>' : '') +
         repoHtml;
 
       renderDots();
