@@ -124,10 +124,10 @@
         id: 'heimdall',
         title: 'Project HEIMDALL',
         shortDesc: 'Interactive classified-aesthetic map of Canadian UFO sightings',
-        tagline: '50 cases from declassified files, plotted across Canada',
-        description: 'An interactive geospatial archive of 50 Canadian UFO sightings spanning from 1662 to the present. Built with Leaflet.js and a custom classified-document aesthetic — manila folder tones, red "CLASSIFIED" stamp, typewriter fonts. Each case is plotted on the map with tier ratings (A/B/C), encounter classifications (CE2/CE3/CE4), and filterable by year. Data sourced from declassified government files, RCMP reports, and public records.',
+        tagline: '70 cases from declassified files, plotted across Canada',
+        description: 'An interactive geospatial archive of 70 Canadian UFO sightings spanning from 1662 to the present. Built with Leaflet.js and a custom classified-document aesthetic — manila folder tones, red "CLASSIFIED" stamp, typewriter fonts. Each case is plotted on the map with tier ratings (A/B/C), encounter classifications (CE2/CE3/CE4), and filterable by year and Hynek type. Data sourced from declassified government files, RCMP reports, and public records.',
         role: 'Solo build — data research and curation, Leaflet.js map development, UI/UX design, classified-aesthetic visual design',
-        challenge: 'Sourcing and structuring 50+ historical cases with varying data quality into a consistent format. Designing an interface that feels like browsing classified files while remaining intuitive.',
+        challenge: 'Sourcing and structuring 70+ historical cases with varying data quality into a consistent format. Designing an interface that feels like browsing classified files while remaining intuitive.',
         outcome: 'A browsable, filterable archive that makes decades of Canadian UFO data accessible. The classified-document aesthetic creates an immersive experience that standard data dashboards lack.',
         tech: ['Leaflet.js', 'JavaScript', 'GeoJSON', 'CSS'],
         year: '2025',
@@ -137,6 +137,42 @@
         screenshots: [
           { src: 'assets/heimdall-filter.png', alt: 'Project HEIMDALL filter panel with UFO sighting case files' },
           { src: 'assets/heimdall-menu.png', alt: 'Project HEIMDALL sidebar menu with classified document aesthetic' }
+        ]
+      },
+      {
+        id: 'buffalo-counter',
+        title: 'Buffalo Counter',
+        shortDesc: 'An interactive visualization of the Great Buffalo Collapse',
+        tagline: 'Watching an ecosystem disappear in real time',
+        description: 'The plains buffalo population went from 30 million to under 1,000 in less than a century. This interactive visualization makes that collapse visceral — a data-proportional timeline where the bars don\'t just shrink, they pulse and change color as the species spirals toward extinction. Built to make a number that\'s too big to comprehend feel real and immediate.',
+        role: 'Solo build — historical research, data modeling, D3.js visualization, visual design',
+        challenge: 'How do you make 30 million feel like a number that matters? The timeline needed to be data-proportional so the collapse hits hard, not just informative.',
+        outcome: 'An experience that turns abstract history into something you can watch happen. The closing image — Chief Poundmaker\'s bones — drives home what was lost beyond the numbers.',
+        tech: ['D3.js', 'JavaScript', 'CSS Animations', 'Historical Data'],
+        year: '2025',
+        link: 'https://bayarddevries.github.io/buffalo-counter/',
+        repo: 'https://github.com/Bayarddevries/buffalo-counter',
+        color: '#8B4513',
+        screenshots: [
+          { src: 'assets/buffalo-counter-main.png', alt: 'Buffalo Counter interactive timeline visualization' }
+        ]
+      },
+      {
+        id: 'turn-tag',
+        title: 'Turn Tag',
+        shortDesc: 'A mobile-first tag game — coming to Google Play',
+        tagline: 'Simple rules, tense moments, built for your phone',
+        description: 'A fast-paced tag game built from the ground up for mobile. One player hides, one seeks, and the orb is always moving. The physics engine drives everything — bumpers, powerups, a minimap — all running at 60fps in the browser. Currently being prepped for release on Google Play as our first published game.',
+        role: 'Solo build — game design, physics engine, mobile-first UI, Play Store prep',
+        challenge: 'Making a browser-based game feel native on mobile. Touch controls, responsive layout, and consistent performance across devices — all without a game engine.',
+        outcome: 'A playable mobile web game with clean module architecture (physics, renderer, powerups, minimap) ready for Android wrapping and Play Store submission.',
+        tech: ['TypeScript', 'Canvas', 'Vite', 'Mobile-First'],
+        year: '2025',
+        link: 'https://bayarddevries.github.io/turn-tag-v2/',
+        repo: 'https://github.com/Bayarddevries/turn-tag-v2',
+        color: '#4A90D9',
+        screenshots: [
+          { src: 'assets/turn-tag-main.png', alt: 'Turn Tag mobile game screenshot' }
         ]
       },
       {
